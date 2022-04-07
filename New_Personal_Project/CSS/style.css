@@ -1,19 +1,68 @@
-.playerLaser{
+body{
+  height: 70vh;
+  margin: 15px;
+  max-width: 50%;
+  box-sizing: border-box;
+}
 
+
+.playerLaser{
+  background-image: url('/assets/playerLaser.png');
+  background-size: cover;
+  background-position: center;
 }
 
 .playerShip{
-
+  background-image: url('/assets/playerShip.png');
+  background-size: cover;
+  background-position: center;
+  
 }
 
 .alienShip {
-
+  background-image: url('/assets/invaderType2.png');
+  background-size: cover;
+  background-position: center;
 }
 
 .alienBomb {
+  background-image: url('/assets/alienLaser.png');
+  background-size: cover;
+  background-position: center;
+}
+
+
+
+.topDisplay {
+
+background-color: black;
+color: white;
+text-align: center;
+padding: 1px;
+justify-content: center;
+}
+
+.game_class {
+  height: 70vh;
+  justify-content: center;
+  align-items: center;
 
 }
 
-.cell {
-  border: 2px solid black;
+.grid {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  justify-content: center;
+
+}
+
+.grid div {
+
+  flex-grow: 1;
+  height: 5%;
+  width: 5%;
+  max-height: 5%;
+  max-width: 5%;
 }

@@ -1,6 +1,6 @@
 const grid = document.querySelector('.grid');
-const width = 25;
-const height = 40;
+const width = 20;
+const height = width;
 const cellCount = width * height;
 let playerPosit = cellCount - width / 2; //bottom screen, middle;
 let enemyPosit = 1;
@@ -12,15 +12,21 @@ let playerCurrentHealth = 10; //player outstanding health points
 let playerLaserLoc = playerPosit;
 let laserNum = 0;
 
-function createGrid() { // make grid map
-  for (let i = 0; i < cellCount; i++) {
-    const cell = document.createElemet('div');
+
+function makeGrid() { // make grid map
+  for (let i = 0; i < (cellCount); i++) {
+    const cell = document.createElement("div");
     cell.classList.add('cell');
     grid.appendChild(cell);
     cells.push(cell);
     cell.innerHTML = i;
+
   }
 }
+makeGrid();
+cells[playerPosit].classList.add('playerShip');
+
+// cells[i + 5].classList.add('alienShip'); //make some alien ships
 
 function addPlayerShip() {                        //place playership
   cells[playerPosit].classList.add('playerShip');
@@ -31,27 +37,24 @@ cells[playerPosit].classList.remove('playerShip');
 function removeAlienShip(z) {                      //remove playership
   cells[z].classList.remove('alienShip');
   }
- //player movements and shots
-// on keystroke< playerLocation -- //moves left
-// document.addEventListener('keydown');
 
-// on keystroke> playerLocation ++ //Player moves right
 document.addEventListener('keydown', (event) =>{
   removePlayerShip();
-      if (event.KeyboardEvent.code === 39 && playerPosit < cellCount) { //move right on key left arrow and not going out of screen
+      if (event.code === 'ArrowRight' && playerPosit < cellCount) { //move right on key left arrow and not going out of screen
         playerPosit += 1;
-      } else if (event.KeyboardEvent.code	=== 37 || playerPosit > (cellCount - width)) { //move left on key left arrow and not going out of screen
+        console.log(event.key);
+        console.log(playerPosit);
+      } else if (event.code === 'ArrowLeft' || playerPosit > (cellCount - width)) { //move left on key left arrow and not going out of screen
         playerPosit -= 1;
+        console.log(event.key);
       }
   addPlayerShip();
 });
 
-for (let i = 0; i < 18; i++) { //make some alien ships
-  cells[i+5].classList.add('alienShip');
-}
-
+// for (let i = 0; i < 18; i++) { //make some alien ships
+//   let x = i + 5;
+// }
 function playerShootLaser(laserNum) {      //self-explanatory
-
     setInterval(() => {
       if ((playerLaserLoc - width) > cellCount) {
       playerLaserLoc -= width; //change position
@@ -60,14 +63,14 @@ function playerShootLaser(laserNum) {      //self-explanatory
       } else {
         cells[playerLaserLoc - width].classList.remove('playerLaser' + laserNum);  //dissapears if offscreen
       }  
-    }, 300);
+    }, 1000);
   }
-
 
 document.addEventListener('keydown', (event) =>{ //ship shoots laser on spacebar key
-  if (event.KeyboardEvent.code === 32) {
-    playerShootLaser();
-  }
+  if (event.code === "SpaceBar") {
+    console.log(event.key);
+    playerShootLaser(event);
+  }})
 
 
 //   for (let i = 0; i < cells.length; i++) {
@@ -96,3 +99,4 @@ document.addEventListener('keydown', (event) =>{ //ship shoots laser on spacebar
 
 // laserLocation - grid.width every 0.2 sec? {loop} //laser moves
 // Player laser - damages or mises; damage takes health, updates score
+
