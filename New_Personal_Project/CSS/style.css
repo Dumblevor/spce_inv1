@@ -1,0 +1,85 @@
+
+.grid-wrap {
+  background-color: white;
+  display: grid;
+
+  border: 2px solid red; 
+  padding: 10px 10px 20px 10px;
+  border-radius: 7px;
+
+  grid-template-columns: repeat(10, 60px);
+  grid-template-rows: repeat(12, 60px);
+
+  max-height: 80vh;
+  max-width: 80vh;
+
+}
+
+
+.playerShipImage {
+  max-width: 60px;
+}
+.playerShip1 {
+grid-column: 5;
+grid-row: 12;
+}
+
+.game_class {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  }
+  
+  .alive img{
+    max-width: 60px;
+  }
+
+  .alienclass1 {
+    grid-column: 3;
+    grid-row: 6;
+  }
+
+  .alienclass2 {
+    grid-column: 5;
+    grid-row: 6;
+  }
+
+  .alienclass3 {
+    grid-column: 7;
+    grid-row: 6;
+  }
+
+  .alienclass4 {
+    grid-column: 4;
+    grid-row: 4;
+  }
+
+  .alienclass5 {
+    grid-column: 6;
+    grid-row: 4;
+  }
+
+  .alienclass6 {
+    grid-column: 8;
+    grid-row: 4;
+  }
+  .alienclass7 {
+    grid-column: 7;
+    grid-row: 2;
+  }
+  .alienclass8 {
+    grid-column: 5;
+    grid-row: 2;
+  }
+  .alienclass9 {
+    grid-column: 3;
+    grid-row: 2;
+  }
+
+
+
+/* .aliensLine1 div {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+} */

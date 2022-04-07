@@ -1,9 +1,9 @@
  //basic variables
- let currentLevel = 1;
+let currentLevel = 1;
 let playerLocation = 0;
- let playerOneScore = 0; //keeps track of his score
- let playerCurrentDamage = 10; //player damage per hit of 1 laser
- let playerCurrentHealth = 10; //player outstanding health points
+let playerOneScore = 0; //keeps track of his score
+let playerCurrentDamage = 10; //player damage per hit of 1 laser
+let playerCurrentHealth = 10; //player outstanding health points
    let alienLine1 = [
     alienicon1 = /assets/alientype1.png;
     alienhealth1 = 10;
