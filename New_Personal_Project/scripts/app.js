@@ -22,7 +22,6 @@ function makeGrid() { // make grid map
     cell.classList.add('cell');
     grid.appendChild(cell); //add divs in html under div.grid
     cells.push(cell); //push div cells into cells array
-    cell.innerHTML = i; //cells innerhtml is their index
   }
 }
 makeGrid(); //make grid map
@@ -76,7 +75,7 @@ function moveFourRight() {
       clearInterval(moveAliens);
       moveFourLeft(); //alternate with move left
      }
-}, 700)
+}, 600)
 }
 function moveFourLeft() {
   let movemenet = 0;
@@ -88,7 +87,7 @@ function moveFourLeft() {
       clearInterval(moveAliens);
       moveFourRight(); //alternate with move right
      }
-}, 700)
+}, 600)
 }
 
 moveFourRight(); //alternates with left, moves 3 not 4.
@@ -126,9 +125,8 @@ function removeAlienShip(z) {                      //remove playership
     cells[x].classList.add('playerLaser');
   };
 
-  function removeLaser(x) {                      
+  function removeLaser(x) {                      //removing lasers
     cells[x].classList.remove('playerLaser');
-
   }
 
   function playerShootLaser() {      //shoot laser
@@ -163,10 +161,14 @@ let detectSpacePress4Laser = document.addEventListener('keydown', (event) =>{
 
 const moveLasers = setInterval(() => { //move all lasers or delete them if flying offscreen
 for (let i = 0; i < lasersPositionsArray.length; i++){
-  removeLaser(lasersPositionsArray[i]);
-  lasersPositionsArray[i] - width < 0 ? removeLaser(lasersPositionsArray[i]) :   lasersPositionsArray[i] -= width;
-  createLaser(lasersPositionsArray[i])
-}}, 1000);
+  removeLaser(lasersPositionsArray[i]); //initial laser remove
+  if( lasersPositionsArray[i] - width < 0 ) {
+    removeLaser(lasersPositionsArray[i]);
+  } else {
+    lasersPositionsArray[i] -= width;
+    createLaser(lasersPositionsArray[i]);
+  }  
+}}, 150);
 
 let playerMove = document.addEventListener('keydown', (event) =>{ //player move around
   removePlayerShip();
@@ -214,4 +216,3 @@ let playerMove = document.addEventListener('keydown', (event) =>{ //player move 
 
 // laserLocation - grid.width every 0.2 sec? {loop} //laser moves
 // Player laser - damages or mises; damage takes health, updates score
-
