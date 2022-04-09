@@ -20,7 +20,17 @@ body{
 }
 
 .alienShip {
+  background-image: url('/assets/invaderType3.png');
+  background-size: cover;
+  background-position: center;
+}
+.alienShip2 {
   background-image: url('/assets/invaderType2.png');
+  background-size: cover;
+  background-position: center;
+}
+.alienShip3 {
+  background-image: url('/assets/invaderType1.png');
   background-size: cover;
   background-position: center;
 }

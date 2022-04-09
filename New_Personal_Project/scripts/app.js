@@ -10,23 +10,90 @@ let playerOneScore = 0; //keeps track of his score
 let playerCurrentDamage = 10; //player damage per hit of 1 laser
 let playerCurrentHealth = 10; //player outstanding health points
 let playerLaserLoc = playerPosit;
-let laserNum = 0;
-
+let nextLaserLoc = playerLaserLoc - width;
+let laserPositionsArray = [];
+let aliensPosArray1 = [];
+let aliensPosArray2 = [];
+let aliensPosArray3 = [];
 
 function makeGrid() { // make grid map
   for (let i = 0; i < (cellCount); i++) {
     const cell = document.createElement("div");
     cell.classList.add('cell');
-    grid.appendChild(cell);
-    cells.push(cell);
-    cell.innerHTML = i;
-
+    grid.appendChild(cell); //add divs in html under div.grid
+    cells.push(cell); //push div cells into cells array
+    cell.innerHTML = i; //cells innerhtml is their index
   }
 }
-makeGrid();
-cells[playerPosit].classList.add('playerShip');
+makeGrid(); //make grid map
+cells[playerPosit].classList.add('playerShip'); // add player ship on map
 
-// cells[i + 5].classList.add('alienShip'); //make some alien ships
+for (let i = 0; i < 5 ; i++) { //add aliens
+  cells[cellCount * (i + 10) /100].classList.add('alienShip'); //creates 1st set of aliens
+  aliensPosArray1.push(cellCount * (i + 10) /100);
+  cells[cellCount * (i + 20) /100].classList.add('alienShip2'); //creates 2nd set of aliens
+  aliensPosArray2.push(cellCount * (i + 20) /100);
+  cells[cellCount * (i + 30) /100].classList.add('alienShip3'); // creates 3rd set of aliens
+  aliensPosArray3.push(cellCount * (i + 30) /100);
+}
+function moveAliensRight() {
+  for (let i = 0; i < 5; i++){
+    cells[aliensPosArray1[i]].classList.remove('alienShip');
+    aliensPosArray1[i] ++;
+    cells[aliensPosArray1[i]].classList.add('alienShip');
+  
+    cells[aliensPosArray2[i]].classList.remove('alienShip2');
+    aliensPosArray2[i] ++;
+    cells[aliensPosArray2[i]].classList.add('alienShip2');
+  
+    cells[aliensPosArray3[i]].classList.remove('alienShip3');
+    aliensPosArray3[i] ++;
+    cells[aliensPosArray3[i]].classList.add('alienShip3');
+   }
+  }
+function moveAliensLeft() {
+    for (let i = 0; i < 5; i++){
+      cells[aliensPosArray1[i]].classList.remove('alienShip');
+      aliensPosArray1[i] --;
+      cells[aliensPosArray1[i]].classList.add('alienShip');
+    
+      cells[aliensPosArray2[i]].classList.remove('alienShip2');
+      aliensPosArray2[i] --;
+      cells[aliensPosArray2[i]].classList.add('alienShip2');
+    
+      cells[aliensPosArray3[i]].classList.remove('alienShip3');
+      aliensPosArray3[i] --;
+      cells[aliensPosArray3[i]].classList.add('alienShip3');
+     }
+    }
+function moveFourRight() {
+  let movemenet = 0;
+  let moveAliens = setInterval(() => {
+    if(movemenet < 3) {
+    moveAliensRight();
+    movemenet ++;
+     } else {
+      clearInterval(moveAliens);
+      moveFourLeft(); //alternate with move left
+     }
+}, 700)
+}
+function moveFourLeft() {
+  let movemenet = 0;
+  let moveAliens = setInterval(() => {
+    if(movemenet < 3) {
+    moveAliensLeft();
+    movemenet ++;
+    console.log('1');
+     } else {
+      clearInterval(moveAliens);
+      moveFourRight(); //alternate with move right
+     }
+}, 700)
+}
+
+moveFourRight(); //alternates with left, moves 3 not 4.
+
 
 function addPlayerShip() {                        //place playership
   cells[playerPosit].classList.add('playerShip');
@@ -38,39 +105,88 @@ function removeAlienShip(z) {                      //remove playership
   cells[z].classList.remove('alienShip');
   }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  function addLaser() {                      
+    cells[playerLaserLoc].classList.add('playerLaser');
+
+  };
+
+  function removeLaser(x) {                      
+    cells[x].classList.remove('playerLaser');
+
+  }
+
+  function playerShootLaser() {      //shoot laser
+    let timeLoop1 = setInterval(() => {
+      if ((playerLaserLoc - width) > 0) {
+      removeLaser(playerLaserLoc); //remove previous laser
+      playerLaserLoc -= width; //change position
+      addLaser(); //add laser
+      
+      } else {
+        removeLaser(playerLaserLoc);  //dissapears if offscreen
+        clearInterval(timeLoop1); //stops this loop
+      }  
+    }, 300);
+  }
+
+
+
+function newLaser() {
+  let initialPos = playerPosit - width;
+  
+
+}
+
 document.addEventListener('keydown', (event) =>{
+  if (event.code === 'Space') {
+    newLaser()
+    //playerShootLaser();
+  }})
+
+
+
+const moveLasers = setInterval(() =>{ //move all lasers
+for (let i = 0; i < laserPositionsArray.length || ; i++){
+  laserPositionsArray[i] ++
+}}, 1000);
+
+
+document.addEventListener('keydown', (event) =>{ //player move around
   removePlayerShip();
-      if (event.code === 'ArrowRight' && playerPosit < cellCount) { //move right on key left arrow and not going out of screen
+      if (event.code === 'ArrowRight' && playerPosit < (cellCount - 1)) { //move right on key left arrow and not going out of screen
         playerPosit += 1;
-        console.log(event.key);
-        console.log(playerPosit);
-      } else if (event.code === 'ArrowLeft' || playerPosit > (cellCount - width)) { //move left on key left arrow and not going out of screen
+        playerLaserLoc = playerPosit; //update laser positioning
+
+      } else if(event.code === 'ArrowLeft' && playerPosit > (cellCount - width)) { //move left on key left arrow and not going out of screen
+
         playerPosit -= 1;
-        console.log(event.key);
+        playerLaserLoc = playerPosit;
       }
   addPlayerShip();
 });
 
+
 // for (let i = 0; i < 18; i++) { //make some alien ships
 //   let x = i + 5;
 // }
-function playerShootLaser(laserNum) {      //self-explanatory
-    setInterval(() => {
-      if ((playerLaserLoc - width) > cellCount) {
-      playerLaserLoc -= width; //change position
-      cells[playerLaserLoc].classList.add('playerLaser' + laserNum); //add laser
-      cells[playerLaserLoc - width].classList.remove('playerLaser' + laserNum); //remove previous laser
-      } else {
-        cells[playerLaserLoc - width].classList.remove('playerLaser' + laserNum);  //dissapears if offscreen
-      }  
-    }, 1000);
-  }
-
-document.addEventListener('keydown', (event) =>{ //ship shoots laser on spacebar key
-  if (event.code === "SpaceBar") {
-    console.log(event.key);
-    playerShootLaser(event);
-  }})
 
 
 //   for (let i = 0; i < cells.length; i++) {
