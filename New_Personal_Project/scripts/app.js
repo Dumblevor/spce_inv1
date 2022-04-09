@@ -11,7 +11,7 @@ let playerCurrentDamage = 10; //player damage per hit of 1 laser
 let playerCurrentHealth = 10; //player outstanding health points
 let playerLaserLoc = playerPosit;
 let nextLaserLoc = playerLaserLoc - width;
-let laserPositionsArray = [];
+let lasersPositionsArray = [];
 let aliensPosArray1 = [];
 let aliensPosArray2 = [];
 let aliensPosArray3 = [];
@@ -84,7 +84,6 @@ function moveFourLeft() {
     if(movemenet < 3) {
     moveAliensLeft();
     movemenet ++;
-    console.log('1');
      } else {
       clearInterval(moveAliens);
       moveFourRight(); //alternate with move right
@@ -123,9 +122,8 @@ function removeAlienShip(z) {                      //remove playership
 
 
   
-  function addLaser() {                      
-    cells[playerLaserLoc].classList.add('playerLaser');
-
+  function createLaser(x) {                      
+    cells[x].classList.add('playerLaser');
   };
 
   function removeLaser(x) {                      
@@ -149,27 +147,28 @@ function removeAlienShip(z) {                      //remove playership
 
 
 
-function newLaser() {
+function newLaserInit() {
   let initialPos = playerPosit - width;
-  
-
+  lasersPositionsArray.push(initialPos);
+  createLaser(initialPos);
 }
 
-document.addEventListener('keydown', (event) =>{
+let detectSpacePress4Laser = document.addEventListener('keydown', (event) =>{
   if (event.code === 'Space') {
-    newLaser()
+    newLaserInit();
     //playerShootLaser();
   }})
 
 
 
-const moveLasers = setInterval(() =>{ //move all lasers
-for (let i = 0; i < laserPositionsArray.length || ; i++){
-  laserPositionsArray[i] ++
+const moveLasers = setInterval(() => { //move all lasers or delete them if flying offscreen
+for (let i = 0; i < lasersPositionsArray.length; i++){
+  removeLaser(lasersPositionsArray[i]);
+  lasersPositionsArray[i] - width < 0 ? removeLaser(lasersPositionsArray[i]) :   lasersPositionsArray[i] -= width;
+  createLaser(lasersPositionsArray[i])
 }}, 1000);
 
-
-document.addEventListener('keydown', (event) =>{ //player move around
+let playerMove = document.addEventListener('keydown', (event) =>{ //player move around
   removePlayerShip();
       if (event.code === 'ArrowRight' && playerPosit < (cellCount - 1)) { //move right on key left arrow and not going out of screen
         playerPosit += 1;
