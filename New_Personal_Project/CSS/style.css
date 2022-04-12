@@ -6,7 +6,6 @@ body{
   border: 2px black solid;
 }
 
-
 .playerLaser{
   background-image: url('/assets/pill.png');
   background-size: 90%;
@@ -16,8 +15,9 @@ body{
 
 .playerShip{
   background-image: url('/assets/playerShip.png');
-  background-size: cover;
+  background-size: 100%;
   background-position: center;
+  background-repeat: no-repeat;
   
 }
 
