@@ -80,7 +80,6 @@ function moveAliensRight() {  //move Aliens right 1 space
   aliensPosArray3[i] ++;
   cells[aliensPosArray3[i]].classList.add('alienShip3');
   }
-
   }
 function moveAliensLeft() {   //move Aliens Left 1 space
     for (let i = 0; i < aliensPosArray1.length; i++){ //for line 1 use array1.length
@@ -186,8 +185,6 @@ function newBombInit() {
   alienBombPosArray.push(initialBombPos);
   createBomb(initialBombPos);
 }
-
-
 const moveLasers = setInterval(() => { //move all lasers or delete them if flying offscreen
   for (let i = 0; i < lasersPositionsArray.length; i++){
     damageAlien();
@@ -199,7 +196,6 @@ const moveLasers = setInterval(() => { //move all lasers or delete them if flyin
       createLaser(lasersPositionsArray[i]);
     }  
   }}, 150);
-
 const moveBombs = setInterval(() => { //move all bombs or delete them if flying offscreen
     for (let i = 0; i < alienBombPosArray.length; i++){
       // damagePlayer();
@@ -211,14 +207,12 @@ const moveBombs = setInterval(() => { //move all bombs or delete them if flying 
         createBomb(alienBombPosArray[i]);
       }  
     }}, 150);
-
 function dropBombs() { // 
   let dropingBombs = setInterval(() => {
         //# times
       newBombInit();
     }, 1000)                  //how often
     }
-
 //call all the functions
 makeGrid(); //make grid map
 createAliens(); //create aliens
@@ -227,7 +221,9 @@ moveFourRight(); //alternates with left, moves 3 not 4.
 moveallthewayDown();
 dropBombs();
 // damagePlayer();
-
+//dissapiear laser when hit alien
+//dissapiear bomb when hit player
+//game over alert 3 scenarios
 
 //event listeners
 let detectSpacePress4Laser = document.addEventListener('keydown', (event) =>{
@@ -235,7 +231,6 @@ let detectSpacePress4Laser = document.addEventListener('keydown', (event) =>{
     newLaserInit();
     //playerShootLaser();
   }})
-
 let playerMove = document.addEventListener('keydown', (event) =>{ //player move around
   removePlayerShip();
       if (event.code === 'ArrowRight' && playerPosit < (cellCount - 1)) { //move right on key left arrow and not going out of screen
