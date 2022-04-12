@@ -16,8 +16,9 @@ let aliensPosArray1 = [];
 let aliensPosArray2 = [];
 let aliensPosArray3 = [];
 let alienBombPosArray = [];
-const scoreBoard = document.getElementsByClassName('scoreBoard');
-scoreBoard.Tz
+const scoreBoard = document.querySelector('.scoreBoard');
+scoreBoard.innerHTML = playerOneScore;
+
 
 function damageAlien() {
   for (let i = 0; i < cellCount ; i++) {
@@ -26,16 +27,19 @@ function damageAlien() {
     let result1 = aliensPosArray1.indexOf(i);
     aliensPosArray1.splice(result1, 1);
     playerOneScore ++;
+    scoreBoard.innerHTML = playerOneScore;
 } else if (cells[i].classList.contains('alienShip2') && cells[i].classList.contains('playerLaser')) {
     cells[i].classList.remove('alienShip2');
     let result2 = aliensPosArray2.indexOf(i);
     aliensPosArray2.splice(result2, 1);
     playerOneScore ++;
+    scoreBoard.innerHTML = playerOneScore;
 } else if (cells[i].classList.contains('alienShip3') && cells[i].classList.contains('playerLaser')) {
     cells[i].classList.remove('alienShip3');
     let result3 = aliensPosArray3.indexOf(i);
     aliensPosArray3.splice(result3, 1);
     playerOneScore ++;
+    scoreBoard.innerHTML = playerOneScore;
 }
 }
 }
@@ -139,7 +143,7 @@ function moveAliensDown() {
 function moveallthewayDown() { // move aliens down
   let movemenet = 0;
   let moveAliens = setInterval(() => {
-    if(movemenet < 5) {         //# times
+    if(movemenet < 7) {         //# times
       moveAliensDown();
     movemenet ++;
      } else {
@@ -158,23 +162,72 @@ function removeAlienShip(z) {                      //remove playership
   }
   function createLaser(x) {                      
     cells[x].classList.add('playerLaser');
-  };
+  }
   function removeLaser(x) {                      //removing lasers
     cells[x].classList.remove('playerLaser');
   }
 
+  function createBomb(h) {                       //creating bomb
+    cells[h].classList.add('alienBomb');
+  };
+  function removeBomb(h) {                      //removing bomb
+    cells[h].classList.remove('alienBomb');
+  }
 function newLaserInit() {
   let initialPos = playerPosit - width;
   lasersPositionsArray.push(initialPos);
   createLaser(initialPos);
 }
+function newBombInit() {
+  let allAliens = aliensPosArray1.concat(aliensPosArray2,aliensPosArray3); //alien arrays together
+  let randomAlienNum = Math.floor(Math.random() * allAliens.length); //randomize an alien number
+  let randomAlien = allAliens[randomAlienNum];
+  let initialBombPos = randomAlien + width; //determine bomb position 
+  alienBombPosArray.push(initialBombPos);
+  createBomb(initialBombPos);
+}
+
+
+const moveLasers = setInterval(() => { //move all lasers or delete them if flying offscreen
+  for (let i = 0; i < lasersPositionsArray.length; i++){
+    damageAlien();
+    removeLaser(lasersPositionsArray[i]); //initial laser remove
+    if( lasersPositionsArray[i] - width < 0 ) {
+      removeLaser(lasersPositionsArray[i]);
+    } else {
+      lasersPositionsArray[i] -= width;
+      createLaser(lasersPositionsArray[i]);
+    }  
+  }}, 150);
+
+const moveBombs = setInterval(() => { //move all bombs or delete them if flying offscreen
+    for (let i = 0; i < alienBombPosArray.length; i++){
+      // damagePlayer();
+      removeBomb(alienBombPosArray[i]); //initial laser remove
+      if(alienBombPosArray[i] + width > cellCount ) {
+        removeBomb(alienBombPosArray[i]);
+      } else {
+        alienBombPosArray[i] += width;
+        createBomb(alienBombPosArray[i]);
+      }  
+    }}, 150);
+
+function dropBombs() { // 
+  let dropingBombs = setInterval(() => {
+        //# times
+      newBombInit();
+    }, 1000)                  //how often
+    }
 
 //call all the functions
 makeGrid(); //make grid map
-cells[playerPosit].classList.add('playerShip'); // add player ship on map
 createAliens(); //create aliens
+addPlayerShip();
 moveFourRight(); //alternates with left, moves 3 not 4.
 moveallthewayDown();
+dropBombs();
+damagePlayer();
+
 
 //event listeners
 let detectSpacePress4Laser = document.addEventListener('keydown', (event) =>{
@@ -182,17 +235,7 @@ let detectSpacePress4Laser = document.addEventListener('keydown', (event) =>{
     newLaserInit();
     //playerShootLaser();
   }})
-const moveLasers = setInterval(() => { //move all lasers or delete them if flying offscreen
-for (let i = 0; i < lasersPositionsArray.length; i++){
-  damageAlien();
-  removeLaser(lasersPositionsArray[i]); //initial laser remove
-  if( lasersPositionsArray[i] - width < 0 ) {
-    removeLaser(lasersPositionsArray[i]);
-  } else {
-    lasersPositionsArray[i] -= width;
-    createLaser(lasersPositionsArray[i]);
-  }  
-}}, 150);
+
 let playerMove = document.addEventListener('keydown', (event) =>{ //player move around
   removePlayerShip();
       if (event.code === 'ArrowRight' && playerPosit < (cellCount - 1)) { //move right on key left arrow and not going out of screen
@@ -206,16 +249,6 @@ let playerMove = document.addEventListener('keydown', (event) =>{ //player move 
       }
   addPlayerShip();
 });
-
-
-
-//       //! damage alien
-
-//       // ! if cell[i] has class player laser and alienship > dissapear laser, lower enemy health, update score up if health <= 0.
-//     }
-//   }
-
-
 
 //   for (let i = 0; i < cells.length; i++) {
 //     if (cells[i].classList.contains('playerShip') || cells[i].classList.contains('alienBomb')) {
@@ -231,6 +264,8 @@ let playerMove = document.addEventListener('keydown', (event) =>{ //player move 
 // if (playerCurrentHealth <= 0) {
 //   //!GAME OVER
 // }
+
+//alert ('GAME OVER')
 
 // on kestroke space visualise laser [location = player - grid.width] //Player shoots
 
