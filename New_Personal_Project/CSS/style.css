@@ -7,8 +7,8 @@ body{
 }
 
 .playerLaser{
-  background-image: url('/assets/pill.png');
-  background-size: 90%;
+  background-image: url('/assets/alienLaser.png');
+  background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -18,7 +18,6 @@ body{
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
-  
 }
 
 .alienShip {
@@ -26,6 +25,7 @@ body{
   background-size: cover;
   background-position: center;
 }
+
 .alienShip2 {
   background-image: url('/assets/invaderType2.png');
   background-size: cover;
@@ -38,7 +38,7 @@ body{
 }
 
 .alienBomb {
-  background-image: url('/assets/alienLaser.png');
+  background-image: url('/assets/pill.png');
   background-size: cover;
   background-position: center;
 }

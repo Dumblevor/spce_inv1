@@ -15,37 +15,30 @@ let lasersPositionsArray = [];
 let aliensPosArray1 = [];
 let aliensPosArray2 = [];
 let aliensPosArray3 = [];
-
+let alienBombPosArray = [];
+const scoreBoard = document.getElementsByClassName('scoreBoard');
+scoreBoard.Tz
 
 function damageAlien() {
-  for (let i = 0; i < 400 ; i++) {
-  if ((cells[i].classList.contains('alienShip') || cells[i].classList.contains('alienShip3') || cells[i].classList.contains('alienShip2')) && cells[i].classList.contains('playerLaser')) {
+  for (let i = 0; i < cellCount ; i++) {
+  if (cells[i].classList.contains('alienShip') && cells[i].classList.contains('playerLaser')) {
     cells[i].classList.remove('alienShip');
-    cells[i].classList.remove('alienShip2');
-    cells[i].classList.remove('alienShip3');
-    console.log(aliensPosArray1, aliensPosArray2, aliensPosArray3);
-
     let result1 = aliensPosArray1.indexOf(i);
     aliensPosArray1.splice(result1, 1);
-
+    playerOneScore ++;
+} else if (cells[i].classList.contains('alienShip2') && cells[i].classList.contains('playerLaser')) {
+    cells[i].classList.remove('alienShip2');
     let result2 = aliensPosArray2.indexOf(i);
-    aliensPosArray1.splice(result2, 1);
-
+    aliensPosArray2.splice(result2, 1);
+    playerOneScore ++;
+} else if (cells[i].classList.contains('alienShip3') && cells[i].classList.contains('playerLaser')) {
+    cells[i].classList.remove('alienShip3');
     let result3 = aliensPosArray3.indexOf(i);
-    aliensPosArray1.splice(result3, 1);
-
-    console.log(aliensPosArray1, aliensPosArray2, aliensPosArray3);
-
-
-  //   aliensPosArray1.filter(alienShip, i);
-  //   aliensPosArray2.filter(checkAlien(, i));
-  //   aliensPosArray3.filter(checkAlien(, i));
-
-  // }
+    aliensPosArray3.splice(result3, 1);
+    playerOneScore ++;
 }
 }
 }
-
 function makeGrid() { // make grid map
   for (let i = 0; i < (cellCount); i++) {
     const cell = document.createElement("div");
@@ -54,10 +47,7 @@ function makeGrid() { // make grid map
     cells.push(cell); //push div cells into cells array
   }
 }
-makeGrid(); //make grid map
-cells[playerPosit].classList.add('playerShip'); // add player ship on map
-
-function createAliens() {
+function createAliens() { //create all the aliens
   for (let i = 0; i < 5 ; i++) { //add aliens
     cells[cellCount * (i + 10) /100].classList.add('alienShip'); //creates 1st set of aliens
     aliensPosArray1.push(cellCount * (i + 10) /100);
@@ -67,39 +57,45 @@ function createAliens() {
     aliensPosArray3.push(cellCount * (i + 30) /100);
   }
 }
+function moveAliensRight() {  //move Aliens right 1 space
 
-function moveAliensRight() {
-  for (let i = 0; i < 5; i++){
-    
+  for (let i = 0; i < aliensPosArray1.length; i++){
     cells[aliensPosArray1[i]].classList.remove('alienShip');
     aliensPosArray1[i] ++;
     cells[aliensPosArray1[i]].classList.add('alienShip');
-  
-    cells[aliensPosArray2[i]].classList.remove('alienShip2');
-    aliensPosArray2[i] ++;
-    cells[aliensPosArray2[i]].classList.add('alienShip2');
-  
-    cells[aliensPosArray3[i]].classList.remove('alienShip3');
-    aliensPosArray3[i] ++;
-    cells[aliensPosArray3[i]].classList.add('alienShip3');
-   }
   }
-function moveAliensLeft() {
-    for (let i = 0; i < 5; i++){
+
+  for (let i = 0; i < aliensPosArray2.length; i++){
+  cells[aliensPosArray2[i]].classList.remove('alienShip2');
+  aliensPosArray2[i] ++;
+  cells[aliensPosArray2[i]].classList.add('alienShip2');
+  }
+
+  for (let i = 0; i < aliensPosArray3.length; i++){
+  cells[aliensPosArray3[i]].classList.remove('alienShip3');
+  aliensPosArray3[i] ++;
+  cells[aliensPosArray3[i]].classList.add('alienShip3');
+  }
+
+  }
+function moveAliensLeft() {   //move Aliens Left 1 space
+    for (let i = 0; i < aliensPosArray1.length; i++){ //for line 1 use array1.length
       cells[aliensPosArray1[i]].classList.remove('alienShip');
       aliensPosArray1[i] --;
       cells[aliensPosArray1[i]].classList.add('alienShip');
-    
-      cells[aliensPosArray2[i]].classList.remove('alienShip2');
-      aliensPosArray2[i] --;
-      cells[aliensPosArray2[i]].classList.add('alienShip2');
-    
-      cells[aliensPosArray3[i]].classList.remove('alienShip3');
-      aliensPosArray3[i] --;
-      cells[aliensPosArray3[i]].classList.add('alienShip3');
-     }
     }
-function moveFourRight() {
+    for (let i = 0; i < aliensPosArray2.length; i++){ //for line 2 use array2.length
+    cells[aliensPosArray2[i]].classList.remove('alienShip2');
+    aliensPosArray2[i] --;
+    cells[aliensPosArray2[i]].classList.add('alienShip2');
+    }
+    for (let i = 0; i < aliensPosArray3.length; i++){ //for line 3 use array3.length
+    cells[aliensPosArray3[i]].classList.remove('alienShip3');
+    aliensPosArray3[i] --;
+    cells[aliensPosArray3[i]].classList.add('alienShip3');
+    }
+    }
+function moveFourRight() {        //move aliens right 3 times every 600 miliseconds
   let movemenet = 0;
   let moveAliens = setInterval(() => {
     if(movemenet < 3) {
@@ -111,7 +107,7 @@ function moveFourRight() {
      }
 }, 600)
 }
-function moveFourLeft() {
+function moveFourLeft() {         //move aliens left 3 times every 600 miliseconds
   let movemenet = 0;
   let moveAliens = setInterval(() => {
     if(movemenet < 3) {
@@ -123,7 +119,34 @@ function moveFourLeft() {
      }
 }, 600)
 }
-moveFourRight(); //alternates with left, moves 3 not 4.
+function moveAliensDown() {
+  for (let i = 0; i < aliensPosArray1.length; i++){ //for line 1 use array1.length
+    cells[aliensPosArray1[i]].classList.remove('alienShip');
+    aliensPosArray1[i] += width;
+    cells[aliensPosArray1[i]].classList.add('alienShip');
+  }
+  for (let i = 0; i < aliensPosArray2.length; i++){ //for line 2 use array2.length
+  cells[aliensPosArray2[i]].classList.remove('alienShip2');
+  aliensPosArray2[i] += width;
+  cells[aliensPosArray2[i]].classList.add('alienShip2');
+  }
+  for (let i = 0; i < aliensPosArray3.length; i++){ //for line 3 use array3.length
+  cells[aliensPosArray3[i]].classList.remove('alienShip3');
+  aliensPosArray3[i] += width;
+  cells[aliensPosArray3[i]].classList.add('alienShip3');
+  }
+  }
+function moveallthewayDown() { // move aliens down
+  let movemenet = 0;
+  let moveAliens = setInterval(() => {
+    if(movemenet < 5) {         //# times
+      moveAliensDown();
+    movemenet ++;
+     } else {
+      clearInterval(moveAliens);
+     }
+}, 3600)                  //how often
+}
 function addPlayerShip() {                        //place playership
   cells[playerPosit].classList.add('playerShip');
 }
@@ -144,8 +167,16 @@ function newLaserInit() {
   let initialPos = playerPosit - width;
   lasersPositionsArray.push(initialPos);
   createLaser(initialPos);
-
 }
+
+//call all the functions
+makeGrid(); //make grid map
+cells[playerPosit].classList.add('playerShip'); // add player ship on map
+createAliens(); //create aliens
+moveFourRight(); //alternates with left, moves 3 not 4.
+moveallthewayDown();
+
+//event listeners
 let detectSpacePress4Laser = document.addEventListener('keydown', (event) =>{
   if (event.code === 'Space') {
     newLaserInit();
@@ -175,9 +206,6 @@ let playerMove = document.addEventListener('keydown', (event) =>{ //player move 
       }
   addPlayerShip();
 });
-
-
-createAliens();
 
 
 
