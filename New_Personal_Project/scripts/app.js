@@ -226,7 +226,7 @@ addPlayerShip();
 moveFourRight(); //alternates with left, moves 3 not 4.
 moveallthewayDown();
 dropBombs();
-damagePlayer();
+// damagePlayer();
 
 
 //event listeners
