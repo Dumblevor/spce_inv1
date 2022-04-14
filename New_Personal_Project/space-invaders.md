@@ -22,14 +22,13 @@ Once the player has destroyed a wave of aliens, the game starts again. The aim i
 * The player should be able to clear at least one wave of aliens
 * The player's score should be displayed at the end of the game
 
-## Suggested enhancements
 
+## Suggested enhancements
 * Responsive design
 * Each wave gets more difficult
 * Persistent leaderboard using `localStorage`
 
 ## Challenges
-
 The main challenge here is the movement of large groups of aliens in formation, and the animation of the bombs and player's shots. There are several approaches here, with collision detection being the more challenging.
 
 ## Tips
