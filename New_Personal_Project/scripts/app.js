@@ -18,23 +18,27 @@ let aliensPosArray3 = [];
 let alienBombPosArray = [];
 const scoreBoard = document.querySelector('.scoreBoard');
 scoreBoard.innerHTML = playerOneScore;
-let gameOver = false;
+let gameOver = 0;
 
 
 function damagePlayer() {
   for (let i = 0; i < cellCount ; i++) {
   if (cells[i].classList.contains('alienBomb') && cells[i].classList.contains('playerShip')) {
     cells[i].classList.remove('playerShip');
-    playerCurrentHealth = 0;  }
+    playerCurrentHealth = 0;
+    gameOver = 1;
+    gameScoreOnGO();
+  }
 }
 }
-const deadPlayer = () => {
+let deadPlayer = () => {
   if (playerCurrentHealth === 0) {
     gameOver = true;
   }
 }
 function damageAlien() {
   for (let i = 0; i < cellCount ; i++) {
+    
   if (cells[i].classList.contains('alienShip') && cells[i].classList.contains('playerLaser')) {
     cells[i].classList.remove('alienShip');
     let result1 = aliensPosArray1.indexOf(i);
@@ -114,7 +118,7 @@ function moveAliensLeft() {   //move Aliens Left 1 space
 function moveFourRight() {        //move aliens right 3 times every 600 miliseconds
   let movemenet = 0;
   let moveAliens = setInterval(() => {
-    if(movemenet < 3 && gameOver === false && playerCurrentHealth > 0) {
+    if(movemenet < 3 && playerCurrentHealth > 0) {
     moveAliensRight();
     movemenet ++;
      } else {
@@ -127,7 +131,7 @@ function moveFourRight() {        //move aliens right 3 times every 600 miliseco
 function moveFourLeft() {         //move aliens left 3 times every 600 miliseconds
   let movemenet = 0;
   let moveAliens = setInterval(() => {
-    if(movemenet < 3 && gameOver === false && playerCurrentHealth > 0) {
+    if(movemenet < 3 && playerCurrentHealth > 0) {
     moveAliensLeft();
     movemenet ++;
      } else {
@@ -156,7 +160,7 @@ function moveAliensDown() {
 function moveallthewayDown() { // move aliens down
   let movemenet = 0;
   let moveAliens = setInterval(() => {
-    if(movemenet < 7 && gameOver === false && playerCurrentHealth > 0) {         //# times
+    if(movemenet < 7 && playerCurrentHealth > 0) {         //# times
       moveAliensDown();
     movemenet ++;
      } else {
@@ -166,7 +170,7 @@ function moveallthewayDown() { // move aliens down
 }
 
 function addPlayerShip() {       
-  if (gameOver === false || playerCurrentHealth > 0) {                 //place playership
+  if (playerCurrentHealth > 0) {                 //place playership
   cells[playerPosit].classList.add('playerShip') ;
 }}
 function removePlayerShip() {                      //remove playership
@@ -183,12 +187,14 @@ function removeAlienShip(z) {                      //remove playership
   }
 
   function createBomb(h) {                       //creating bomb
-    if (gameOver === false || playerCurrentHealth > 0) { 
+    if (playerCurrentHealth > 0 && h < 400) { 
     cells[h].classList.add('alienBomb');
   }}
 
   function removeBomb(h) {                      //removing bomb
-    cells[h].classList.remove('alienBomb');
+      cells[h].classList.remove('alienBomb');
+    // let bombindexRem = alienBombPosArray.indexOf(h); //experimental code
+    // alienBombPosArray.splice(bombindexRem, 1); //experimental code
   }
 function newLaserInit() {
   let initialPos = playerPosit - width;
@@ -197,11 +203,13 @@ function newLaserInit() {
 }
 function newBombInit() {
   let allAliens = aliensPosArray1.concat(aliensPosArray2,aliensPosArray3); //alien arrays together
-  let randomAlienNum = Math.floor(Math.random() * allAliens.length); //randomize an alien number
+  let randomAlienNum = Math.floor((Math.random() * allAliens.length) + 1); //randomize an alien number
   let randomAlien = allAliens[randomAlienNum];
   let initialBombPos = randomAlien + width; //determine bomb position 
+  if (initialBombPos < 400) { //experiment
   alienBombPosArray.push(initialBombPos);
   createBomb(initialBombPos);
+}
 }
 const moveLasers = setInterval(() => { //move all lasers or delete them if flying offscreen
   for (let i = 0; i < lasersPositionsArray.length; i++){
@@ -215,24 +223,38 @@ const moveLasers = setInterval(() => { //move all lasers or delete them if flyin
     }  
   }}, 150);
 
-const moveBombs = setInterval(() => { //move all bombs or delete them if flying offscreen
+let moveBombs = setInterval(() => { //move all bombs or delete them if flying offscreen
   let allAliens = aliensPosArray1.concat(aliensPosArray2,aliensPosArray3);
     for (let i = 0; i < alienBombPosArray.length; i++){
       damagePlayer(); // make sure if bomb lands on alien to damage/kill player
-      removeBomb(alienBombPosArray[i]); //initial laser remove
-      if(alienBombPosArray[i] + width > cellCount ) {
-        removeBomb(alienBombPosArray[i]);
-      } else if (allAliens.length > 0 && gameOver === false && playerCurrentHealth > 0){ //if there are still aliens left
+      removeBomb(alienBombPosArray[i]); //initial bomb remove
+      // console.log(alienBombPosArray[i]); //experimental code
+      if((alienBombPosArray[i] + width) > (cellCount - 1)) { //if next position will be offscreen => 
+        removeBomb(alienBombPosArray[i]); // remove bomb
+        
+      } else if (allAliens.length > 0 && playerCurrentHealth > 0){ //if there are still aliens left & player is alive //experimental code
         alienBombPosArray[i] += width;  //updates location of the new bomb
         createBomb(alienBombPosArray[i]); //adds alienBomb class to a cell div with the createBomb function.
       }
+
+        //stretch - limit array.length (do an array to remove bombs)
+      // let bombindexRem = alienBombPosArray.indexOf(i); //experimental code
+      //   alienBombPosArray.splice(bombindexRem, 1); //experimental code
+
+
     }}, 150);
 
 function dropBombs() { // 
   let dropingBombs = setInterval(() => {
-        //# times
       newBombInit();
-    }, 1000)                  //how often
+    }, 550)                  //how often
+    }
+
+
+    function gameScoreOnGO() {
+      if (gameOver === 1) {
+        alert("Game over Player! Your score is " + playerOneScore);
+      }
     }
 //call all the functions
 
@@ -244,9 +266,9 @@ function dropBombs() { //
   moveallthewayDown();
   dropBombs();
 
-  if (gameOver = true) {
-    alert("Game over Player! Your score is " + playerOneScore);
-  }
+
+
+
 
 
 // 
