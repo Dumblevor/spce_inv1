@@ -138,7 +138,6 @@ function moveFourRight() {        //move aliens right 3 times every 600 miliseco
      }
 }, 600)
 }
-
 function moveFourLeft() {         //move aliens left 3 times every 600 miliseconds
   let movemenet = 0;
   let moveAliens = setInterval(() => {
@@ -204,12 +203,12 @@ function removeBomb(h) {                      //removing bomb
     // let bombindexRem = alienBombPosArray.indexOf(h); //experimental code
     // alienBombPosArray.splice(bombindexRem, 1); //experimental code
   }
-function newLaserInit() {
+function newLaserInit() {                 //initiates new laser 
   let initialPos = playerPosit - width;
   lasersPositionsArray.push(initialPos);
   createLaser(initialPos);
 }
-function newBombInit() {
+function newBombInit() {              //initiates new bomb 
   let allAliens = aliensPosArray1.concat(aliensPosArray2,aliensPosArray3); //alien arrays together
   let randomAlienNum = Math.floor((Math.random() * allAliens.length) + 1); //randomize an alien number
   let randomAlien = allAliens[randomAlienNum];
@@ -234,7 +233,6 @@ let moveLasers = setInterval(() => { //move all lasers or delete them if flying 
 
     damageAlien(); // make sure if laser lands on alien to damage/kill alien
   }}, 150);
-
 let moveBombs = setInterval(() => { //move all bombs or delete them if flying offscreen
   let allAliens = aliensPosArray1.concat(aliensPosArray2,aliensPosArray3);
     for (let i = 0; i < alienBombPosArray.length; i++){
@@ -264,15 +262,14 @@ function gameScoreOnGO() {
         }
       }
     }
-
-//call all the functions
+function gameInit() {            //initiates games basically, calls all initial functions
   makeGrid(); //make grid map
   createAliens(); //create aliens
-  addPlayerShip();
+  addPlayerShip();              //initiates player ship
   moveFourRight(); //alternates with left, moves 3 not 4.
-  moveallthewayDown();
-  dropBombs();
-
+  moveallthewayDown();          //initiates aliens going down
+  dropBombs();                //initiates bomb dropping by aliens
+}         
 //dissapiear laser when hit alien
 //dissapiear bomb when hit player
 //game over alert 3 scenarios
@@ -297,3 +294,4 @@ let playerMove = document.addEventListener('keydown', (event) =>{ //player move 
       }
   addPlayerShip();
 });
+gameInit(); //runs game
