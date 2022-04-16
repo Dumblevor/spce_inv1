@@ -1,5 +1,6 @@
 const grid = document.querySelector('.grid');
 const scoreBoard = document.querySelector('.scoreBoard');
+let timeScreen = document.querySelector(".screen").innerHTML;
 const width = 20;
 const height = width;
 const cellCount = width * height;
@@ -19,6 +20,16 @@ let aliensPosArray3 = [];
 let alienBombPosArray = [];
 scoreBoard.innerHTML = playerOneScore;
 let gameOver = 0;
+
+
+function timer() {
+  setInterval(() => {
+    let time0 = new Date().toLocaleTimeString() - Date().toLocaleTimeString();
+    timeScreen = time0;
+    document.querySelector(".screen").innerHTML = timeScreen;
+   }, 1000);
+
+}
 
 function damagePlayer() {
   for (let i = 0; i < cellCount ; i++) {
@@ -252,6 +263,7 @@ function gameInit() {            //initiates games basically, calls all initial 
   moveFourRight(); //alternates with left, moves 3 not 4.
   moveallthewayDown();          //initiates aliens going down
   dropBombs();                //initiates bomb dropping by aliens
+  timer();
 }         
 let detectSpacePress4Laser = document.addEventListener('keydown', (event) =>{ //spacebar hit detection
   if (event.code === 'Space') {
@@ -272,3 +284,4 @@ let playerMove = document.addEventListener('keydown', (event) =>{ //player move 
 });
 gameInit(); //runs game
 //game over alert 3 scenarios
+
