@@ -22,7 +22,8 @@ body{
 
 .alienShip {
   background-image: url('assets/invaderType3.png');
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat ;
   background-position: center;
 }
 
@@ -43,7 +44,11 @@ body{
   background-position: center;
 }
 
-
+.rocksClass {
+  background-image: url('assets/rock1.png');
+  background-size: cover;
+  background-position: center;
+}
 
 .topDisplay {
 background-color: black;
@@ -57,7 +62,7 @@ justify-content: center;
   height: 70vh;
   justify-content: center;
   align-items: center;
-  width: 500px;
+  width: 650px;
 
 }
 
@@ -75,8 +80,8 @@ justify-content: center;
   flex-grow: 1;
   height: 5%;
   width: 5%;
-  max-height: 5%;
-  max-width: 5%;
+  max-height: 6%;
+  max-width: 6%;
 }
 
 
