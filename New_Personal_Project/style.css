@@ -1,8 +1,9 @@
 body{
   height: 100vh;
   margin: 15px;
-  max-width: 50%;
   box-sizing: border-box;
+  display: flex;
+  justify-content: center;
 }
 
 .playerLaser{
@@ -56,7 +57,7 @@ justify-content: center;
   height: 70vh;
   justify-content: center;
   align-items: center;
-
+  width: 500px;
 
 }
 
@@ -71,10 +72,14 @@ justify-content: center;
 }
 
 .grid div {
-
   flex-grow: 1;
   height: 5%;
   width: 5%;
   max-height: 5%;
   max-width: 5%;
 }
+
+
+/* .playertest img {
+  max-width: 100px;
+} */
