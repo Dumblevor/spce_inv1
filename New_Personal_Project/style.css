@@ -3,42 +3,41 @@ body{
   margin: 15px;
   max-width: 50%;
   box-sizing: border-box;
-
 }
 
 .playerLaser{
-  background-image: url('/assets/alienLaser.png');
+  background-image: url('assets/alienLaser.png');
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .playerShip{
-  background-image: url('/assets/playerShip.png');
+  background-image: url('assets/playerShip.png');
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .alienShip {
-  background-image: url('/assets/invaderType3.png');
+  background-image: url('assets/invaderType3.png');
   background-size: cover;
   background-position: center;
 }
 
 .alienShip2 {
-  background-image: url('/assets/invaderType2.png');
+  background-image: url('assets/invaderType2.png');
   background-size: cover;
   background-position: center;
 }
 .alienShip3 {
-  background-image: url('/assets/invaderType1.png');
+  background-image: url('assets/invaderType1.png');
   background-size: cover;
   background-position: center;
 }
 
 .alienBomb {
-  background-image: url('/assets/pill.png');
+  background-image: url('assets/pill.png');
   background-size: cover;
   background-position: center;
 }

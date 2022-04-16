@@ -1,6 +1,5 @@
 const grid = document.querySelector('.grid');
 const scoreBoard = document.querySelector('.scoreBoard');
-let timeScreen = document.querySelector(".screen").innerHTML;
 const width = 20;
 const height = width;
 const cellCount = width * height;
@@ -22,14 +21,7 @@ scoreBoard.innerHTML = playerOneScore;
 let gameOver = 0;
 
 
-function timer() {
-  setInterval(() => {
-    let time0 = new Date().toLocaleTimeString() - Date().toLocaleTimeString();
-    timeScreen = time0;
-    document.querySelector(".screen").innerHTML = timeScreen;
-   }, 1000);
 
-}
 
 function damagePlayer() {
   for (let i = 0; i < cellCount ; i++) {
@@ -40,10 +32,6 @@ function damagePlayer() {
     gameScoreOnGO();
   }}}
 
-let deadPlayer = () => {
-  if (playerCurrentHealth === 0) {
-    gameOver = true;
-  }}
 
 function damageAlien() {
   for (let i = 0; i < cellCount ; i++) {
@@ -115,6 +103,7 @@ function moveAliensRight() {  //move Aliens right 1 space
   }}
 
 function moveAliensLeft() {   //move Aliens Left 1 space
+
     for (let i = 0; i < aliensPosArray1.length; i++){ //for line 1 use array1.length
       cells[aliensPosArray1[i]].classList.remove('alienShip');
       aliensPosArray1[i] --;
@@ -187,7 +176,8 @@ function addPlayerShip() {
   if (playerCurrentHealth > 0) {                 //place playership
   cells[playerPosit].classList.add('playerShip') ;
 }}
-function removePlayerShip() {                      //remove playership
+
+function removePlayerShip() {                      // remove playership
 cells[playerPosit].classList.remove('playerShip');
 }
 function removeAlienShip(z) {                      //remove playership
@@ -212,14 +202,17 @@ function newLaserInit() {                 //initiates new laser
   createLaser(initialPos);
 }
 function newBombInit() {              //initiates new bomb 
-  let allAliens = aliensPosArray1.concat(aliensPosArray2,aliensPosArray3); //alien arrays together
-  let randomAlienNum = Math.floor((Math.random() * allAliens.length) + 1); //randomize an alien number
+  let randomAlienNum = 0;
+  let allAliens = aliensPosArray1.concat(aliensPosArray2,aliensPosArray3);//alien arrays together
+  console.log(allAliens.length);
+  allAliens.length > 1 ? randomAlienNum = Math.floor((Math.random() * allAliens.length) + 1) : randomAlienNum = 1; //randomize an alien number
   let randomAlien = allAliens[randomAlienNum];
   let initialBombPos = randomAlien + width; //determine bomb position 
   if (initialBombPos < 400) { //experiment
   alienBombPosArray.push(initialBombPos);
   createBomb(initialBombPos);
 }}
+
 let moveLasers = setInterval(() => { //move all lasers or delete them if flying offscreen
   for (let i = 0; i < lasersPositionsArray.length; i++){
     removeLaser(lasersPositionsArray[i]); //initial laser remove
@@ -250,11 +243,19 @@ function dropBombs() { //
       newBombInit();
     }, 550) }                 //how often
 
-function gameScoreOnGO() {
+function gameScoreOnGO() {          //displayig score on Game Over
+  let allAliens = aliensPosArray1.concat(aliensPosArray2,aliensPosArray3);    
+  if (playerOneScore === 15) {
+        gameOver = 1;
+      }
       if (gameOver === 1 && playerCurrentHealth > 0) {
-        if(window.confirm("Level cleared Player! Your score is " + playerOneScore)) {
-          currentLevel = 2;
-        }}}
+        window.confirm("Level cleared Player 1! Your score is " + playerOneScore);
+        } else if (gameOver === 1 && playerCurrentHealth <= 0) {
+          window.confirm("Player 1, you died. Better luck next time. Your score is " + playerOneScore);
+        } else if (gameOver === 2) {
+          window.confirm("Player 1, you lost. Your planet has been invaded. Better luck next time. Your score is " + playerOneScore);
+        }
+      }
 
 function gameInit() {            //initiates games basically, calls all initial functions
   makeGrid(); //make grid map
@@ -263,7 +264,6 @@ function gameInit() {            //initiates games basically, calls all initial 
   moveFourRight(); //alternates with left, moves 3 not 4.
   moveallthewayDown();          //initiates aliens going down
   dropBombs();                //initiates bomb dropping by aliens
-  timer();
 }         
 let detectSpacePress4Laser = document.addEventListener('keydown', (event) =>{ //spacebar hit detection
   if (event.code === 'Space') {
