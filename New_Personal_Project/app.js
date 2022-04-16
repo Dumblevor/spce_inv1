@@ -98,9 +98,9 @@ function createAliens(x) { //create all the aliens
   }}
 
   function createRocks() { //create all the rocks
-    for (let i = 1; i < 4 ; i++) { //add rocks
-      cells[cellCount - (width*3 + 5*i)].classList.add('rocksClass'); //creates 1st set of aliens
-      rocksPositions.push(cellCount - 4*i);
+    for (let i = 1; i <  3; i++) { //add rocks
+      cells[cellCount - (width*3 + 7*i)].classList.add('rocksClass'); //creates 1st set of aliens
+      rocksPositions.push(cellCount - 5*i);
     }}
 
 function moveAliensRight() {  //move Aliens right 1 space
@@ -191,7 +191,7 @@ function moveallthewayDown() { // move aliens down
        gameOver = 1;
       clearInterval(moveAliens);
      }
-}, 1000)}                  //how often
+}, 3700)}                  //how often
 
 function addPlayerShip() {       
   if (playerCurrentHealth > 0) {                 //place playership
@@ -330,8 +330,8 @@ function gameInit() {            //initiates games basically, calls all initial 
   bombsTimingUpdate(currentLevel); // update bombs timing to level
   makeGrid();                   //make grid map
   createRocks();
-  createAliens(currentLevel);               //create aliens dependent on level
   addPlayerShip();              //initiates player ship
+  createAliens(currentLevel);               //create aliens dependent on level
   moveFourRight();            //alternates with left, moves 3 not 4.
   moveallthewayDown();          //initiates aliens going down
   dropBombs(bombsTiming);                //initiates bomb dropping by aliens
