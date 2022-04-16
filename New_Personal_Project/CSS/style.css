@@ -3,7 +3,7 @@ body{
   margin: 15px;
   max-width: 50%;
   box-sizing: border-box;
-  border: 2px black solid;
+
 }
 
 .playerLaser{
@@ -68,6 +68,7 @@ justify-content: center;
   flex-wrap: wrap;
   height: 100%;
   justify-content: center;
+  border: 2px black solid;
 
 }
 

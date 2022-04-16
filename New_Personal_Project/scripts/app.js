@@ -1,4 +1,5 @@
 const grid = document.querySelector('.grid');
+const scoreBoard = document.querySelector('.scoreBoard');
 const width = 20;
 const height = width;
 const cellCount = width * height;
@@ -7,7 +8,7 @@ let enemyPosit = 1;
 let cells = [];
 let currentLevel = 1;
 let playerOneScore = 0; //keeps track of his score
-let playerCurrentDamage = 10; //player damage per hit of 1 laser
+// let playerCurrentDamage = 10; //player damage per hit of 1 laser
 let playerCurrentHealth = 10; //player outstanding health points
 let playerLaserLoc = playerPosit;
 let nextLaserLoc = playerLaserLoc - width;
@@ -16,7 +17,6 @@ let aliensPosArray1 = [];
 let aliensPosArray2 = [];
 let aliensPosArray3 = [];
 let alienBombPosArray = [];
-const scoreBoard = document.querySelector('.scoreBoard');
 scoreBoard.innerHTML = playerOneScore;
 let gameOver = 0;
 
@@ -144,7 +144,7 @@ function moveFourLeft() {         //move aliens left 3 times every 600 milisecon
      }
 }, 600)}
 
-function moveAliensDown() {
+function moveAliensDown() {           //moves aliens donwwards
   for (let i = 0; i < aliensPosArray1.length; i++){ //for line 1 use array1.length
     cells[aliensPosArray1[i]].classList.remove('alienShip');
     aliensPosArray1[i] += width;
@@ -164,7 +164,7 @@ function moveAliensDown() {
 function moveallthewayDown() { // move aliens down
   let movemenet = 0;
   let moveAliens = setInterval(() => {
-    if(movemenet < 7 && playerCurrentHealth > 0) {         //# times
+    if(movemenet < 8 && playerCurrentHealth > 0) {         //# times + stops if player is dead
       moveAliensDown();
     movemenet ++;
      } else {
@@ -209,7 +209,6 @@ function newBombInit() {              //initiates new bomb
   alienBombPosArray.push(initialBombPos);
   createBomb(initialBombPos);
 }}
-
 let moveLasers = setInterval(() => { //move all lasers or delete them if flying offscreen
   for (let i = 0; i < lasersPositionsArray.length; i++){
     removeLaser(lasersPositionsArray[i]); //initial laser remove
@@ -226,18 +225,13 @@ let moveLasers = setInterval(() => { //move all lasers or delete them if flying 
   let allAliens = aliensPosArray1.concat(aliensPosArray2,aliensPosArray3);
     for (let i = 0; i < alienBombPosArray.length; i++){
       damagePlayer(); // make sure if bomb lands on alien to damage/kill player
-
       removeBomb(alienBombPosArray[i]); //initial bomb remove
-      // console.log(alienBombPosArray[i]); //experimental code
       if((alienBombPosArray[i] + width) > (cellCount - 1)) { //if next position will be offscreen => 
         removeBomb(alienBombPosArray[i]); // remove bomb
       } else if (allAliens.length > 0 && playerCurrentHealth > 0){ //if there are still aliens left & player is alive //experimental code
         alienBombPosArray[i] += width;  //updates location of the new bomb
         createBomb(alienBombPosArray[i]); //adds alienBomb class to a cell div with the createBomb function.
       }
-        //stretch - limit array.length (do an array to remove bombs)
-      // let bombindexRem = alienBombPosArray.indexOf(i); //experimental code
-      //   alienBombPosArray.splice(bombindexRem, 1); //experimental code
     }}, 150);
 
 function dropBombs() { // 
@@ -277,5 +271,4 @@ let playerMove = document.addEventListener('keydown', (event) =>{ //player move 
   addPlayerShip();
 });
 gameInit(); //runs game
-
 //game over alert 3 scenarios
