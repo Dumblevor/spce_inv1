@@ -5,7 +5,7 @@ const playerNameHtml = document.querySelector('.playerName');
 const width = 20;
 const height = width;
 const cellCount = width * height;
-let playerPosit = cellCount - width / 2; //bottom screen, middle;
+let playerPosit = cellCount - width * 3 / 2; //bottom screen, middle;
 let cells = [];
 let currentLevel = 1;
 let playerOneScore = 0; //keeps track of his score
@@ -23,12 +23,13 @@ scoreBoard.innerHTML = playerOneScore;
 let gameOver = 0;
 let bombsTiming = 500;
 
+
 function updateLvlOnStart (x) {
   currentLevel = x;
   levelNum.innerHTML = x;
 }
 function bombsTimingUpdate (levelX) {  
-  bombsTiming = bombsTiming * ((100  - (8 * levelX))/100) ; //boosts bombing speed on every level (by lowering the interval)
+  bombsTiming = bombsTiming * ((100  - (10 * levelX))/100) ; //boosts bombing speed on every level (by lowering the interval)
 }
 
 function damagePlayer() {
@@ -48,7 +49,7 @@ function damageAlien() {
     cells[i].classList.remove('alienShip');
     let result1 = aliensPosArray1.indexOf(i);
     aliensPosArray1.splice(result1, 1);
-    playerOneScore ++;
+    playerOneScore = playerOneScore + Number(currentLevel);
     scoreBoard.innerHTML = playerOneScore;
     removeLaser(i);
     let result = lasersPositionsArray.indexOf(i);
@@ -58,7 +59,7 @@ function damageAlien() {
     cells[i].classList.remove('alienShip2');
     let result2 = aliensPosArray2.indexOf(i);
     aliensPosArray2.splice(result2, 1);
-    playerOneScore ++;
+    playerOneScore = playerOneScore + Number(currentLevel);
     scoreBoard.innerHTML = playerOneScore;
     removeLaser(i);
     let result = lasersPositionsArray.indexOf(i);
@@ -68,7 +69,7 @@ function damageAlien() {
     cells[i].classList.remove('alienShip3');
     let result3 = aliensPosArray3.indexOf(i);
     aliensPosArray3.splice(result3, 1);
-    playerOneScore ++;
+    playerOneScore = playerOneScore + Number(currentLevel);
     scoreBoard.innerHTML = playerOneScore;
     removeLaser(i);
     let result = lasersPositionsArray.indexOf(i);
@@ -86,22 +87,37 @@ function makeGrid() { // make grid map
     cells.push(cell); //push div cells into cells array
   }}
 
-function createAliens(x) { //create all the aliens
-  for (let i = 0; i < 5 * x ; i++) { //add aliens
-    cells[cellCount * (i + 10) /100].classList.add('alienShip'); //creates 1st set of aliens
-    aliensPosArray1.push(cellCount * (i + 10) /100);
-    cells[cellCount * (i + 20) /100].classList.add('alienShip2'); //creates 2nd set of aliens
-    aliensPosArray2.push(cellCount * (i + 20) /100);
-    cells[cellCount * (i + 30) /100].classList.add('alienShip3'); // creates 3rd set of aliens
-    aliensPosArray3.push(cellCount * (i + 30) /100);
+function makeButtons() { // make buttons
+if (localStorage.getItem("level") > 1) { 
+  gameInit();
+} else {
+  const button1 = document.createElement("button");
+  button1.classList.add('button');
+  button1.classList.add('button1');
+  button1.innerHTML = 'Play me ';
+  grid.appendChild(button1); 
+}
+}
 
+function createRocks() { //create all the rocks
+  for (let i = 1; i <  3; i++) { //add rocks
+    cells[cellCount - (width*3 + 7*i)].classList.add('rocksClass'); //creates 1st set of aliens
+    rocksPositions.push(cellCount - 5*i);
   }}
 
-  function createRocks() { //create all the rocks
-    for (let i = 1; i <  3; i++) { //add rocks
-      cells[cellCount - (width*3 + 7*i)].classList.add('rocksClass'); //creates 1st set of aliens
-      rocksPositions.push(cellCount - 5*i);
-    }}
+
+function createAliens(x) { //create all the aliens
+ let z = 4 + x;
+  for (let i = 1; i < z ; i++) { //add aliens
+    cells[(4-x) + i * 2].classList.add('alienShip'); //creates 1st set of aliens
+    aliensPosArray1.push((4-x) + i * 2);
+    cells[(4-x) + i * 2 + width].classList.add('alienShip2'); //creates 2nd set of aliens
+    aliensPosArray2.push((4-x) + i * 2 + width);
+    cells[(4-x) + i * 2 + width * 2].classList.add('alienShip3'); // creates 3rd set of aliens
+    aliensPosArray3.push((4-x) + i * 2 + width * 2);
+  }}
+
+
 
 function moveAliensRight() {  //move Aliens right 1 space
   for (let i = 0; i < aliensPosArray1.length; i++){
@@ -121,7 +137,6 @@ function moveAliensRight() {  //move Aliens right 1 space
   }}
 
 function moveAliensLeft() {   //move Aliens Left 1 space
-
     for (let i = 0; i < aliensPosArray1.length; i++){ //for line 1 use array1.length
       cells[aliensPosArray1[i]].classList.remove('alienShip');
       aliensPosArray1[i] --;
@@ -151,11 +166,11 @@ function moveFourRight() {        //move aliens right 3 times every 600 miliseco
 }, 500)}
 
 function moveFourLeft() {         //move aliens left 3 times every 600 miliseconds
-  let movemenet = 0;
+  let movemenet1 = 0;
   let moveAliens = setInterval(() => {
-    if(movemenet < 3 && playerCurrentHealth > 0) {
+    if(movemenet1 < 3 && playerCurrentHealth > 0) {
     moveAliensLeft();
-    movemenet ++;
+    movemenet1 ++;
      } else {
       clearInterval(moveAliens);
       moveFourRight(); //alternate with move right
@@ -182,7 +197,7 @@ function moveAliensDown() {           //moves aliens donwwards
 function moveallthewayDown() { // move aliens down
   let movemenet = 0;
   let moveAliens = setInterval(() => {
-    if(movemenet < 10 && playerCurrentHealth > 0) {         //# times + stops if player is dead
+    if(movemenet < 15 && playerCurrentHealth > 0) {         //# times + stops if player is dead
       moveAliensDown();
       checkRocks();
       gameScoreOnGO();
@@ -191,7 +206,7 @@ function moveallthewayDown() { // move aliens down
        gameOver = 1;
       clearInterval(moveAliens);
      }
-}, 3700)}                  //how often
+}, 3450 - (100 * currentLevel))}                  //how often
 
 function addPlayerShip() {       
   if (playerCurrentHealth > 0) {                 //place playership
@@ -225,7 +240,6 @@ function newLaserInit() {                 //initiates new laser
 function newBombInit() {              //initiates new bomb 
   let randomAlienNum = 0;
   let allAliens = aliensPosArray1.concat(aliensPosArray2,aliensPosArray3);//alien arrays together
-
   randomAlienNum = Math.floor((Math.random() * allAliens.length)) //randomize an alien number
   let randomAlien = allAliens[randomAlienNum];
   let initialBombPos = randomAlien + width; //determine bomb position 
@@ -234,35 +248,35 @@ function newBombInit() {              //initiates new bomb
   createBomb(initialBombPos);
 }}
 
-let moveLasers = setInterval(() => { //move all lasers or delete them if flying offscreen
-  for ( let i = 0; i < cellCount; i++) {
-    if (cells[i].classList.contains('playerLaser') && cells[i].classList.contains('rocksClass')) {
-      removeLaser(i);
-      let result = lasersPositionsArray.indexOf(i);
-      lasersPositionsArray.splice(result, 1);
+function moveLasers() {
+ setInterval(() => { //move all lasers or delete them if flying offscreen
+    for ( let i = 0; i < cellCount; i++) {
+      if (cells[i].classList.contains('playerLaser') && cells[i].classList.contains('rocksClass')) {
+        removeLaser(i);
+        let result = lasersPositionsArray.indexOf(i);
+        lasersPositionsArray.splice(result, 1);
+      }
     }
-  }
 
-  for (let i = 0; i < lasersPositionsArray.length; i++){
-    removeLaser(lasersPositionsArray[i]); //initial laser remove
-    if(lasersPositionsArray[i] - width < 0 ) {
-      removeLaser(lasersPositionsArray[i]);
-    } else if (playerCurrentHealth > 0) { // if player is alive 
-      lasersPositionsArray[i] -= width;   //new laser position
-      createLaser(lasersPositionsArray[i]); //create new laser at the position
-    }
+    for (let i = 0; i < lasersPositionsArray.length; i++){
+      removeLaser(lasersPositionsArray[i]); //initial laser remove
+      if(lasersPositionsArray[i] - width < 0 ) {
+        removeLaser(lasersPositionsArray[i]);
+      } else if (playerCurrentHealth > 0) { // if player is alive 
+        lasersPositionsArray[i] -= width;   //new laser position
+        createLaser(lasersPositionsArray[i]); //create new laser at the position
+      }
     damageAlien(); // make sure if laser lands on alien to damage/kill alien
   }}, 170);
+}
 
-  let moveBombs = setInterval(() => { //move all bombs or delete them if flying offscreen
+  function moveBombs() {
+    setInterval(() => { //move all bombs or delete them if flying offscreen
   let allAliens = aliensPosArray1.concat(aliensPosArray2,aliensPosArray3);
   for (let i = 0; i < cellCount; i++) {
     if (cells[i].classList.contains('rocksClass') && cells[i].classList.contains('alienBomb')) {
       removeBomb(i); // remove bomb if it hits rock
-      // console.log('remove bomb from cell #' + i);
       let result = alienBombPosArray.indexOf(i);
-      // console.log('result to be spliced as index' + result);
-      // console.log('spliced' + alienBombPosArray.splice(result, 1));
       alienBombPosArray.splice(result, 1);
   } }
     for (let i = 0; i < alienBombPosArray.length; i++){
@@ -270,23 +284,29 @@ let moveLasers = setInterval(() => { //move all lasers or delete them if flying 
       removeBomb(alienBombPosArray[i]); //initial bomb remove
       if ((alienBombPosArray[i] + width) > (cellCount - 1)) { //if next position will be offscreen => 
         removeBomb(alienBombPosArray[i]); // remove bomb
+    // } else if (allAliens.length > 0 && playerCurrentHealth > 0 && (cells[i].classList.contains('alienShip2') || cells[i].classList.contains('alienShip') || cells[i].classList.contains('alienShip3'))) { //if there are still aliens left & player is alive //experimental code
+    //   alienBombPosArray[i] += width * 2;  //updates location of the new bomb
+    //   createBomb(alienBombPosArray[i]); //adds alienBomb class to a cell div with the createBomb function.
     } else if (allAliens.length > 0 && playerCurrentHealth > 0){ //if there are still aliens left & player is alive //experimental code
         alienBombPosArray[i] += width;  //updates location of the new bomb
         createBomb(alienBombPosArray[i]); //adds alienBomb class to a cell div with the createBomb function.
       }
     }
 }, 170);
+  }
 
 function dropBombs(bombsTiming) {           //time loop that drops bombs from aliens
   let dropingBombs = setInterval(() => {
       newBombInit();                //initiate a new bomb
+      console.log(bombsTiming);
     }, bombsTiming) }                 //how often
 
 function levelChange(x) { //change level and restart game
-  x ++;
-  localStorage.setItem("level", x);
-  localStorage.setItem("bombs", x);
-  location.reload();
+  x ++;                                 //for each level change +1
+ //saves the player name
+  localStorage.setItem("level", x); //saves the level number
+  localStorage.setItem("bombs", x); //saves the player name
+  location.reload(); //reloads the game
   }
 
   function resetFun() {
@@ -317,28 +337,9 @@ function gameScoreOnGO() {          //displayig score on Game Over
   if (gameOver === 2) {
       window.confirm(playerNameHtml.innerHTML + ", you lost. Your planet has been invaded. Better luck next time. Your score is " + playerOneScore) ? resetFun() : resetFun();
     }
-
           }
 
-
-
-function gameInit() {            //initiates games basically, calls all initial functions
-  if (localStorage.getItem("level") != null) {
-    updateLvlOnStart(localStorage.getItem("level"));
-  } //update level from local storage
-  playerNameHtml.innerHTML = window.prompt('What is your name, player?', 'Player 1'); //updates player name from prompt
-  bombsTimingUpdate(currentLevel); // update bombs timing to level
-  makeGrid();                   //make grid map
-  createRocks();
-  addPlayerShip();              //initiates player ship
-  createAliens(currentLevel);               //create aliens dependent on level
-  moveFourRight();            //alternates with left, moves 3 not 4.
-  moveallthewayDown();          //initiates aliens going down
-  dropBombs(bombsTiming);                //initiates bomb dropping by aliens
-}         
-
-
-
+function addEventListeners() {
 let detectSpacePress4Laser = document.addEventListener('keydown', (event) =>{ //spacebar hit detection
   event.preventDefault();
   if (event.code === 'Space') {
@@ -347,14 +348,51 @@ let detectSpacePress4Laser = document.addEventListener('keydown', (event) =>{ //
 
 let playerMove = document.addEventListener('keydown', (event) =>{ //player move around
   removePlayerShip();
-      if (event.code === 'ArrowRight' && playerPosit < (cellCount - 1)) { //move right on key left arrow and not going out of screen
+      if (event.code === 'ArrowRight' && playerPosit < (cellCount - width - 1)) { //move right on key left arrow and not going out of screen
         playerPosit += 1;
         playerLaserLoc = playerPosit; //update laser positioning
-
-      } else if(event.code === 'ArrowLeft' && playerPosit > (cellCount - width)) { //move left on key left arrow and not going out of screen
+      } else if(event.code === 'ArrowLeft' && playerPosit > (cellCount - width*2)) { //move left on key left arrow and not going out of screen
         playerPosit -= 1;
         playerLaserLoc = playerPosit;
       }
   addPlayerShip();
 });
-gameInit(); //runs game
+}
+
+function gameInit() {            //initiates games basically, calls all initial functions
+
+  if (localStorage.getItem("level") != null) {
+    updateLvlOnStart(localStorage.getItem("level"),);
+  } //update level from local storage
+  playerNameHtml.innerHTML = localStorage.getItem("playerName"); //update name from local storage
+
+  makeGrid();
+  bombsTimingUpdate(Number(currentLevel)); // update bombs timing to level
+  moveLasers();
+  moveBombs();
+  createRocks();
+  addPlayerShip();              //initiates player ship
+  createAliens(Number(currentLevel));               //create aliens dependent on level
+  moveFourRight();            //alternates with left, moves 3 not 4.
+  moveallthewayDown();          //initiates aliens going down
+  dropBombs(bombsTiming);                //initiates bomb dropping by aliens
+  addEventListeners();
+}   
+
+//buttons
+//splash screen
+//start button
+//toggle sound volume button
+//onbutton click gamInit();
+// gameInit(); //runs game
+makeButtons();
+
+let button1 = document.querySelector('.button1');
+// button1.addEventListener("click", gameInit);
+
+button1.onclick = function() {
+  playerNameHtml.innerHTML = window.prompt('What is your name, player?', 'Player 1'); //updates player name from prompt
+  localStorage.setItem("playerName", playerNameHtml.innerHTML);
+  gameInit();
+  button1.remove();
+}

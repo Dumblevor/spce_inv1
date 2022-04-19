@@ -5,8 +5,7 @@ body{
   display: flex;
   justify-content: center;
   background-image: url('assets/newBackground.jpg');
-  background-size: 100%;
-  background-position: center;
+  background-size: cover;
   background-repeat: no-repeat;
 }
 
@@ -18,7 +17,7 @@ body{
 }
 
 .playerShip{
-  background-image: url('assets/playerCar.png');
+  background-image: url('assets/newPlayer.png');
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -100,4 +99,26 @@ background-color: white;
 text-align: left;
 padding: 10px;
 border-radius: 15px;
+}
+
+.button {
+  height: 50px;
+  width: 250px;
+  text-align: center;
+  border: white solid 2px;
+  border-radius: 15px;
+  margin: auto;
+}
+
+.button:hover {
+  background-color: #008CBA;
+  color: white;
+}
+
+.logo {
+  height: 250px;
+  width: 250px;
+  border-radius: 21px;
+  margin: 50px;
+
 }
