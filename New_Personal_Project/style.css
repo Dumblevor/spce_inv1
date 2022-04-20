@@ -17,12 +17,11 @@ body{
 }
 
 .playerShip{
-  background-image: url('assets/newPlayer.png');
-  background-size: 100%;
+  background-image: url('assets/final-player.png');
+  background-size: contain;
+  background-repeat: no-repeat ;
   background-position: center;
-  background-repeat: no-repeat;
 
-  border-radius: 25px;
 }
 
 .alienShip {
@@ -40,17 +39,18 @@ body{
   background-position: center;
 }
 .alienShip3 {
-  background-image: url('assets/newAlien1.png');
-  background-size: 90px;
+  background-image: url('assets/star-wars.png');
+  background-size: contain;
   background-repeat: no-repeat ;
   background-position: center;
 }
 
 .alienBomb {
-  background-image: url('assets/pill.png');
+  background-image: url('assets/nuclear-bomb.png');
   background-size: contain;
   background-repeat: no-repeat ;
   background-position: center;
+  background-size: 30px;
 }
 
 .rocksClass {
@@ -105,9 +105,11 @@ border-radius: 15px;
   height: 50px;
   width: 250px;
   text-align: center;
-  border: white solid 2px;
+  border: red solid 2px;
   border-radius: 15px;
   margin: auto;
+  background-color: white;
+  font-weight: bold;
 }
 
 .button:hover {
@@ -121,4 +123,12 @@ border-radius: 15px;
   border-radius: 21px;
   margin: 50px;
 
+}
+
+.speed {
+  background-image: url('assets/Untitled design-10.png');
+  box-sizing: border-box;
+  background-size: 110%;
+  background-position: center;
+  background-repeat: no-repeat;
 }

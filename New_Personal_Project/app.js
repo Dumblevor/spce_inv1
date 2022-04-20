@@ -6,6 +6,7 @@ const width = 20;
 const height = width;
 const cellCount = width * height;
 let playerPosit = cellCount - width * 3 / 2; //bottom screen, middle;
+let speedPos = playerPosit + width;
 let cells = [];
 let currentLevel = 1;
 let playerOneScore = 0; //keeps track of his score
@@ -211,10 +212,14 @@ function moveallthewayDown() { // move aliens down
 function addPlayerShip() {       
   if (playerCurrentHealth > 0) {                 //place playership
   cells[playerPosit].classList.add('playerShip') ;
+  cells[speedPos].classList.add('speed');
 }}
+
+
 
 function removePlayerShip() {                      // remove playership
 cells[playerPosit].classList.remove('playerShip');
+cells[speedPos].classList.remove('speed');
 }
 function removeAlienShip(z) {                      //remove playership
   cells[z].classList.remove('alienShip');
@@ -350,9 +355,11 @@ let playerMove = document.addEventListener('keydown', (event) =>{ //player move 
   removePlayerShip();
       if (event.code === 'ArrowRight' && playerPosit < (cellCount - width - 1)) { //move right on key left arrow and not going out of screen
         playerPosit += 1;
+        speedPos += 1;
         playerLaserLoc = playerPosit; //update laser positioning
       } else if(event.code === 'ArrowLeft' && playerPosit > (cellCount - width*2)) { //move left on key left arrow and not going out of screen
         playerPosit -= 1;
+        speedPos -= 1;
         playerLaserLoc = playerPosit;
       }
   addPlayerShip();
