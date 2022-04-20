@@ -2,7 +2,6 @@ const grid = document.querySelector('.grid');
 const scoreBoard = document.querySelector('.scoreBoard');
 const levelNum = document.querySelector('.levelNum');
 const playerNameHtml = document.querySelector('.playerName');
-const speedTest = document.querySelector(".speed");
 const width = 20;
 const height = width;
 const cellCount = width * height;
@@ -28,14 +27,17 @@ let bombsTiming = 500;
 
 
 function loopSpeedLines() {
+let speedTest = document.querySelector(".speed");
+let i = 1;
  setInterval(() => {
-for (let i = 1; i < 12; i++ ) {
-  let urlTest = ('assets/' + i + '.png');
-  speedTest.style.backgroundImage = `url(${urlTest})`;
+  speedTest.style.backgroundImage = "url('assets/" + i + ".png')";
+  i++;
+  if (i > 11) {
+    i = 1;
+  }
+ }, 100)
 
-}}, 350)
 }
-
 
 function updateLvlOnStart (x) {
   currentLevel = x;
@@ -221,18 +223,21 @@ function moveallthewayDown() { // move aliens down
      }
 }, 3450 - (100 * currentLevel))}                  //how often
 
+
 function addPlayerShip() {       
   if (playerCurrentHealth > 0) {                 //place playership
-  cells[playerPosit].classList.add('playerShip') ;
+  cells[playerPosit].classList.add('playerShip');
   cells[speedPos].classList.add('speed');
+  loopSpeedLines();
+
 }}
-
-
 
 function removePlayerShip() {                      // remove playership
 cells[playerPosit].classList.remove('playerShip');
 cells[speedPos].classList.remove('speed');
+cells[speedPos].style.backgroundImage = '';
 }
+
 function removeAlienShip(z) {                      //remove playership
   cells[z].classList.remove('alienShip');
 }
@@ -315,7 +320,6 @@ function moveLasers() {
 function dropBombs(bombsTiming) {           //time loop that drops bombs from aliens
   let dropingBombs = setInterval(() => {
       newBombInit();                //initiate a new bomb
-      console.log(bombsTiming);
     }, bombsTiming) }                 //how often
 
 function levelChange(x) { //change level and restart game
@@ -364,22 +368,20 @@ let detectSpacePress4Laser = document.addEventListener('keydown', (event) =>{ //
   }})
 
 let playerMove = document.addEventListener('keydown', (event) =>{ //player move around
-  removePlayerShip();
+  removePlayerShip(); //remove player ship + speed animation
       if (event.code === 'ArrowRight' && playerPosit < (cellCount - width - 1)) { //move right on key left arrow and not going out of screen
         playerPosit += 1;
-        speedPos += 1;
         playerLaserLoc = playerPosit; //update laser positioning
       } else if(event.code === 'ArrowLeft' && playerPosit > (cellCount - width*2)) { //move left on key left arrow and not going out of screen
         playerPosit -= 1;
-        speedPos -= 1;
         playerLaserLoc = playerPosit;
       }
-  addPlayerShip();
+      speedPos = playerPosit + width;
+      addPlayerShip(); //
 });
 }
 
 function gameInit() {            //initiates games basically, calls all initial functions
-
   if (localStorage.getItem("level") != null) {
     updateLvlOnStart(localStorage.getItem("level"),);
   } //update level from local storage
@@ -396,7 +398,6 @@ function gameInit() {            //initiates games basically, calls all initial 
   moveallthewayDown();          //initiates aliens going down
   dropBombs(bombsTiming);                //initiates bomb dropping by aliens
   addEventListeners();
-  loopSpeedLines();
 }   
 
 //buttons

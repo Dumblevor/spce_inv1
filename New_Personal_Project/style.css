@@ -126,9 +126,7 @@ border-radius: 15px;
 }
 
 .speed {
-
-  box-sizing: border-box;
-  background-size: 110%;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
