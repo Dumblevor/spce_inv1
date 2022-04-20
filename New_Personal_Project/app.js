@@ -2,6 +2,7 @@ const grid = document.querySelector('.grid');
 const scoreBoard = document.querySelector('.scoreBoard');
 const levelNum = document.querySelector('.levelNum');
 const playerNameHtml = document.querySelector('.playerName');
+const speedTest = document.querySelector(".speed");
 const width = 20;
 const height = width;
 const cellCount = width * height;
@@ -23,6 +24,17 @@ let rocksPositions = [];
 scoreBoard.innerHTML = playerOneScore;
 let gameOver = 0;
 let bombsTiming = 500;
+
+
+
+function loopSpeedLines() {
+ setInterval(() => {
+for (let i = 1; i < 12; i++ ) {
+  let urlTest = ('assets/' + i + '.png');
+  speedTest.style.backgroundImage = `url(${urlTest})`;
+
+}}, 350)
+}
 
 
 function updateLvlOnStart (x) {
@@ -384,6 +396,7 @@ function gameInit() {            //initiates games basically, calls all initial 
   moveallthewayDown();          //initiates aliens going down
   dropBombs(bombsTiming);                //initiates bomb dropping by aliens
   addEventListeners();
+  loopSpeedLines();
 }   
 
 //buttons
