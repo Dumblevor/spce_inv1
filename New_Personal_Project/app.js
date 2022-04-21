@@ -29,14 +29,13 @@ let bombsTiming = 500;
 function loopSpeedLines() {
 let speedTest = document.querySelector(".speed");
 let i = 1;
- setInterval(() => {
+let speedLoop = setInterval(() => {
   speedTest.style.backgroundImage = "url('assets/" + i + ".png')";
   i++;
-  if (i > 11) {
+  if (i > 10) {
     i = 1;
   }
  }, 100)
-
 }
 
 function updateLvlOnStart (x) {
@@ -235,7 +234,6 @@ function addPlayerShip() {
 function removePlayerShip() {                      // remove playership
 cells[playerPosit].classList.remove('playerShip');
 cells[speedPos].classList.remove('speed');
-cells[speedPos].style.backgroundImage = '';
 }
 
 function removeAlienShip(z) {                      //remove playership
@@ -324,7 +322,6 @@ function dropBombs(bombsTiming) {           //time loop that drops bombs from al
 
 function levelChange(x) { //change level and restart game
   x ++;                                 //for each level change +1
- //saves the player name
   localStorage.setItem("level", x); //saves the level number
   localStorage.setItem("bombs", x); //saves the player name
   location.reload(); //reloads the game
@@ -340,7 +337,6 @@ function levelChange(x) { //change level and restart game
     for (let i = 0; i < cellCount; i++) {
       if ((cells[i].classList.contains('alienShip') && cells[i].classList.contains('rocksClass')) || (cells[i].classList.contains('alienShip2') && cells[i].classList.contains('rocksClass')) || (cells[i].classList.contains('alienShip3') && cells[i].classList.contains('rocksClass')) ) {
         gameOver = 2;
-        console.log(gameOver)
       }
   }
 }
