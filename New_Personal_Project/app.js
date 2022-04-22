@@ -362,7 +362,20 @@ function gameScoreOnGO() {          //displayig score on Game Over
         gameOver = 1;
       }
   if (gameOver === 1 && playerCurrentHealth > 0) {
-      window.confirm("Level cleared, " + playerNameHtml.innerHTML + "! Your score is " + playerOneScore) ? levelChange(currentLevel) : resetFun();
+      // window.confirm("Level cleared, " + playerNameHtml.innerHTML + "! Your score is " + playerOneScore); 
+      modal.style.display = "block"; // show modal
+      let nxtLvlBut = document.createElement("button");
+      nxtLvlBut.classList.add('submit');
+      nxtLvlBut.innerHTML = "PLAY NEXT LEVEL";
+      nxtLvlBut.onclick = function() {
+        nxtLvlBut.remove(); //remove button
+        modal.style.display = "none"; // close modal
+        levelChange(currentLevel);
+      }
+      document.querySelector(".modal-content").innerHTML = "Level cleared, " + playerNameHtml.innerHTML + "! Your score is " + playerOneScore + "!" + "<br></br>";
+      document.querySelector(".modal-content").appendChild(nxtLvlBut);
+
+  // ? levelChange(currentLevel) : resetFun();
   } else if (gameOver === 1 && playerCurrentHealth <= 0) {
       window.confirm(playerNameHtml.innerHTML + ", you died. Better luck next time. Your score is " + playerOneScore) ? resetFun() : resetFun();
         }
@@ -424,8 +437,6 @@ let button1 = document.querySelector('.button1');
 // Get the modal
 const modal = document.getElementById("myModal");
 
-// Get the button that opens the modal
-const btn = document.getElementById("myBtn");
 
 // Get the <span> element that closes the modal
 const span = document.getElementsByClassName("close")[0];
@@ -454,7 +465,7 @@ window.onclick = function(event) {
 }
 
 button1.onclick = function() {
-  modal.style.display = "block";
+  modal.style.display = "block"; // show modal
   button1.remove();
   // playerNameHtml.innerHTML = window.prompt('What is your name, player?', 'Player 1'); //updates player name from prompt
 }
