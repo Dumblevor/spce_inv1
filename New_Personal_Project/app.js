@@ -36,7 +36,7 @@ function updateLvlOnStart (x) {
   levelNum.innerHTML = x;
 }
 
-function bombsTimingUpdate (levelX) {  
+function bombsTimingUpdate (levelX) { 
   bombsTiming = bombsTiming * ((100  - (10 * levelX))/100) ; //boosts bombing speed on every level (by lowering the interval)
 }
 
@@ -268,8 +268,7 @@ function moveLasers() {
         createLaser(lasersPositionsArray[i]);                             //create new laser at the position
       }
     damageAlien();                                                      // make sure if laser lands on alien to damage/kill alien
-  }}, 170);
-}
+  }}, 170);}
 
   function moveBombs() {
     setInterval(() => {                                                 //move all bombs or delete them if flying offscreen
@@ -396,7 +395,7 @@ function gameInit() {                                                    //initi
   moveFourRight();                                                     //alternates with left, moves 3 not 4.
   dropBombs(bombsTiming);                                               //initiates bomb dropping by aliens
   addEventListeners();
-  grid.style.cursor = 'none';                                       //hide cursor when game starts
+  grid.style.cursor = 'none';                                       //!hide cursor when game starts
 }   
 
 makeButtons();
@@ -417,7 +416,7 @@ window.onclick = function(event) {                                              
     gameInit();                                                           //start game
   }}
 
-button1.onclick = function() {
-  modal.style.display = "block";                                          // show modal
-  button1.remove();                                                 //remove button
+button1.onclick = function() {                                    //when player clicks the button to start the game 
+  modal.style.display = "block";                                          // show modal that enquires the player name and saves it
+  button1.remove();                                                 //remove button 
 }
