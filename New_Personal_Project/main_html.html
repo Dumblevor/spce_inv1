@@ -10,7 +10,12 @@
 </head>
 
 <body>
-  <img src="assets/animatedLogo.gif" class="logo"></img>
+  <span> <img src="assets/animatedLogo.gif" class="logo"></img> <p class="instructions"> <b>Instructions: </b> <br>
+    Left and Right arrow keys move you ship. <br>
+    Hitting the space bar shoots lasers. <br>
+    Rules of engagement are one shot one kill.
+    </p></span>
+
   <div class = "game_class">
     
     <!-- Trigger/Open The Modal -->
@@ -19,18 +24,19 @@
 <div id="myModal" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
-    <form class="modalform">
-    <label for="fname">Player name:</label>
-    <input type="text" id="pname" name="pname"><br>
-    <input type="submit" value="Submit" class="submit">
+    <form class="modalform" name="playerOneForm" >
+    <label for="fname">Enter player name:</label>
+    <input type="text" id="pname" name="pname"><br><br>
+    <hr>
+    <input type="submit" value="START GAME" class="submit">
   </form>
   </div>
 </div>
 
     <div class="topDisplay">
-      <p><span class='playerName'>Player 1</span> Score: <span class="scoreBoard">0</span>
-      Level: <span class="levelNum">1</span>
-      Player health: <span class="player_health">100</span>
+      <p style="text-align:center;">Player: <span class='playerName'>Player 1</span> | Score: <span class="scoreBoard">0</span>
+       | Level: <span class="levelNum">1</span>
+      <!-- Player health: <span class="player_health">100</span> -->
     </p>
     </div> 
     
@@ -39,11 +45,7 @@
     <div class="grid">
 
     </div>
-    <p class="instructions"> <b>Instructions: </b> <br>
-    Left and Right arrow keys move you ship. <br>
-    Hitting the space bar shoots lasers. <br>
-    Rules of engagement are one shot one kill.
-    </p>
+
   
   </body>
 

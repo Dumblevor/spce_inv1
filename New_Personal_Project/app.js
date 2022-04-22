@@ -6,7 +6,7 @@ const width = 20;
 const height = width;
 const cellCount = width * height;
 let playerPosit = cellCount - width * 3 / 2; //bottom screen, middle;
-// let speedPos = playerPosit + width;
+let speedPos = playerPosit + width;
 let cells = [];
 let currentLevel = 1;
 let playerOneScore = 0; //keeps track of his score
@@ -23,7 +23,7 @@ let rocksPositions = [];
 scoreBoard.innerHTML = playerOneScore;
 let gameOver = 0;
 let bombsTiming = 500;
-
+// let speedTest = document.querySelector(".speed");
 
 
 // function loopSpeedLines(x) {
@@ -117,7 +117,7 @@ if (localStorage.getItem("level") > 1) {
   const button1 = document.createElement("button");
   button1.classList.add('button');
   button1.classList.add('button1');
-  button1.innerHTML = 'Play me ';
+  button1.innerHTML = 'PLAY';
   grid.appendChild(button1); 
 }
 }
@@ -242,13 +242,13 @@ function moveallthewayDown() { // move aliens down
 function addPlayerShip() {       
   if (playerCurrentHealth > 0) {                 //place playership
   cells[playerPosit].classList.add('playerShip'); // adds playership class to select with CSS
-  // cells[speedPos].classList.add('speed'); // adds class to add animation
+  cells[speedPos].classList.add('speed'); // adds class to add animation
   // loopSpeedLines(0); // adds loop of speed anmimation
 }}
 
 function removePlayerShip() {                      // remove playership
 cells[playerPosit].classList.remove('playerShip');
-// loopSpeedLines(1);
+cells[speedPos].classList.remove('speed'); // adds class to add animation
 }
 
 function removeAlienShip(z) {                      //remove playership
@@ -387,7 +387,7 @@ let playerMove = document.addEventListener('keydown', (event) =>{ //player move 
         playerPosit -= 1;
         playerLaserLoc = playerPosit;
       }
-      // speedPos = playerPosit + width;
+      speedPos = playerPosit + width;
       addPlayerShip(); //
 });
 }
@@ -408,6 +408,7 @@ function gameInit() {            //initiates games basically, calls all initial 
   moveFourRight();            //alternates with left, moves 3 not 4.
   dropBombs(bombsTiming);                //initiates bomb dropping by aliens
   addEventListeners();
+  grid.style.cursor = 'none'; //hide cursor when game starts
 }   
 
 //custom prompt screen
@@ -431,27 +432,26 @@ const span = document.getElementsByClassName("close")[0];
 const modalForm = document.querySelector(".modalform");
 const submit = document.querySelector(".submit");
 
-// When the user clicks on <span> (x), close the modal
-submit.onclick = function() {
-  playerNameHtml.innerHTML = document.querySelector('#pname').innerHTML;
+// When the user submits, close the modal, set name, start game
+modalForm.onsubmit = function() {
+  playerNameHtml.innerHTML = document.forms["playerOneForm"]["pname"].value;
   localStorage.setItem("playerName", playerNameHtml.innerHTML);
-  modal.style.display = "none";
-  gameInit();
+  modal.style.display = "none"; // close modal
+  gameInit(); //start game
+  return false;
 }
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
   if (event.target == modal) {
-    playerNameHtml.innerHTML = document.querySelector('#pname').innerHTML;
+    console.log('noooo');
+    playerNameHtml.innerHTML = document.forms["playerOneForm"]["pname"].value;
     localStorage.setItem("playerName", playerNameHtml.innerHTML);
-    modal.style.display = "none";
-    gameInit();
+    modal.style.display = "none"; // close modal
+    gameInit(); //start game
+
   }
 }
-
-
-
-
 
 button1.onclick = function() {
   modal.style.display = "block";

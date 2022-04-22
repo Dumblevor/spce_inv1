@@ -99,6 +99,7 @@ background-color: white;
 text-align: left;
 padding: 10px;
 border-radius: 15px;
+margin: 20px;
 }
 
 .button {
@@ -113,8 +114,10 @@ border-radius: 15px;
 }
 
 .button:hover {
-  background-color: #008CBA;
+  background-color: black;
+  border: white solid 2px;
   color: white;
+  cursor: pointer;
 }
 
 .logo {
@@ -130,6 +133,28 @@ border-radius: 15px;
   background-position: center;
   background-repeat: no-repeat;
 } */
+
+.speed {
+
+  background-size: contain;
+  background-repeat: no-repeat ;
+  background-position: center;
+  animation: speedMove 1s infinite;
+}
+
+@keyframes speedMove {
+  0%   {background-image: url('assets/1.png');}
+  11%  {background-image: url('assets/2.png');}
+  22%  {background-image: url('assets/3.png');}
+  33%  {background-image: url('assets/4.png');}
+  44%  {background-image: url('assets/5.png');}
+  55%  {background-image: url('assets/6.png');}
+  66%  {background-image: url('assets/7.png');}
+  78%  {background-image: url('assets/8.png');}
+  90%  {background-image: url('assets/9.png');}
+  100%  {background-image: url('assets/10.png');}
+
+}
 
 
 /* The Modal (background) */
@@ -151,8 +176,11 @@ border-radius: 15px;
   background-color: #fefefe;
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
-  border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  width: 50%; /* Could be more or less, depending on screen size */
+  text-align: center;
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.75);
+  font-weight: bold;
 }
 
 /* The Close Button */
@@ -168,4 +196,32 @@ border-radius: 15px;
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+#pname {
+  padding: 7px;
+  border-radius: 15px;
+  border: 1px solid white;
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+.submit {
+  border-radius: 10px;
+  border: 2px solid black;
+  background-color: black;
+  color: white;
+  font-weight:400;
+  padding: 5px 15px 5px 15px;
+}
+.submit:hover {
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  border: 2px solid black;
+}
+
+hr {
+  background-color: white;
+  border: 0.5px solid white;
+  border-radius: 15px;
 }
