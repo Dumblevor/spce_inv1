@@ -416,11 +416,45 @@ function gameInit() {            //initiates games basically, calls all initial 
 makeButtons();
 let button1 = document.querySelector('.button1');
 
-button1.onclick = function() {
-  
-  playerNameHtml.innerHTML = window.prompt('What is your name, player?', 'Player 1'); //updates player name from prompt
+
+
+
+
+// Get the modal
+const modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+const btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+const span = document.getElementsByClassName("close")[0];
+const modalForm = document.querySelector(".modalform");
+const submit = document.querySelector(".submit");
+
+// When the user clicks on <span> (x), close the modal
+submit.onclick = function() {
+  playerNameHtml.innerHTML = document.querySelector('#pname').innerHTML;
   localStorage.setItem("playerName", playerNameHtml.innerHTML);
+  modal.style.display = "none";
   gameInit();
-  button1.remove();
 }
 
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    playerNameHtml.innerHTML = document.querySelector('#pname').innerHTML;
+    localStorage.setItem("playerName", playerNameHtml.innerHTML);
+    modal.style.display = "none";
+    gameInit();
+  }
+}
+
+
+
+
+
+button1.onclick = function() {
+  modal.style.display = "block";
+  button1.remove();
+  // playerNameHtml.innerHTML = window.prompt('What is your name, player?', 'Player 1'); //updates player name from prompt
+}

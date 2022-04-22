@@ -6,25 +6,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <script defer src="app.js" charset="utf-8"></script>
+  
 </head>
 
 <body>
   <img src="assets/animatedLogo.gif" class="logo"></img>
   <div class = "game_class">
+    
+    <!-- Trigger/Open The Modal -->
+<!-- <button id="myBtn">Open Modal</button> -->
+  <!-- Modal content -->
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <form class="modalform">
+    <label for="fname">Player name:</label>
+    <input type="text" id="pname" name="pname"><br>
+    <input type="submit" value="Submit" class="submit">
+  </form>
+  </div>
+</div>
 
     <div class="topDisplay">
       <p><span class='playerName'>Player 1</span> Score: <span class="scoreBoard">0</span>
-
       Level: <span class="levelNum">1</span>
       Player health: <span class="player_health">100</span>
     </p>
-
-    </div> <!-- top info -->
+    </div> 
     
-    <div class="grid">
-<!-- 
 
-<span class="playertest"><img src="assets/playerShip.png"></img></span> -->
+
+    <div class="grid">
 
     </div>
     <p class="instructions"> <b>Instructions: </b> <br>
