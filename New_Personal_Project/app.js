@@ -1,5 +1,6 @@
 //! Intro: This game uses minimal HTML and several loops to move things around the map.
 //! Loops are broken down into several functions to allow for easy debugging.
+//JavaScript 77.2% ; CSS 16.5% ; HTML 6.3%
 
 const grid = document.querySelector('.grid');
 const scoreBoard = document.querySelector('.scoreBoard');
