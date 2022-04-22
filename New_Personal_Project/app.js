@@ -40,7 +40,7 @@ function bombsTimingUpdate (levelX) {
   bombsTiming = bombsTiming * ((100  - (10 * levelX))/100) ; //boosts bombing speed on every level (by lowering the interval)
 }
 
-function damagePlayer() {
+function damagePlayer() {                                         //damage player 
   for (let i = 0; i < cellCount ; i++) {
   if (cells[i].classList.contains('alienBomb') && cells[i].classList.contains('playerShip')) {
     cells[i].classList.remove('playerShip');
@@ -49,7 +49,7 @@ function damagePlayer() {
     gameScoreOnGO();
   }}}
 
-function damageAlien() {
+function damageAlien() {                                            //damage alien invaders
   for (let i = 0; i < cellCount ; i++) {
   if (cells[i].classList.contains('alienShip') && cells[i].classList.contains('playerLaser')) {
     cells[i].classList.remove('alienShip');
@@ -84,7 +84,7 @@ function damageAlien() {
 } }}
 
 
-function makeGrid() { // make grid map
+function makeGrid() {                                                    // make grid map
   for (let i = 0; i < cellCount; i++) {
     const cell = document.createElement("div");
     cell.classList.add('cell');
@@ -207,33 +207,33 @@ function moveAliensDown() {                                                //mov
 }}
 
 function addPlayerShip() {       
-  if (playerCurrentHealth > 0) {                            //place playership
+  if (playerCurrentHealth > 0) {                                        //place playership
   cells[playerPosit].classList.add('playerShip');           // adds playership class to select with CSS
   cells[speedPos].classList.add('speed');                   // adds class to add animation
 }}
 
-function removePlayerShip() {                      // remove playership
+function removePlayerShip() {                                 // remove playership
 cells[playerPosit].classList.remove('playerShip');
-cells[speedPos].classList.remove('speed'); // adds class to add animation
+cells[speedPos].classList.remove('speed');                    // adds class to add animation
 }
 
-function removeAlienShip(z) {                      //remove playership
+function removeAlienShip(z) {                                       //remove playership
   cells[z].classList.remove('alienShip');
 }
 function createLaser(x) {                      
     cells[x].classList.add('playerLaser');
 }
-function removeLaser(x) {                      //removing lasers
+function removeLaser(x) {                                        //removing lasers
     cells[x].classList.remove('playerLaser');
 }
-function createBomb(h) {                       //creating bomb
+function createBomb(h) {                                            //creating bomb
     if (playerCurrentHealth > 0 && h < 400) { 
     cells[h].classList.add('alienBomb');
 }}
-function removeBomb(h) {                      //removing bomb
+function removeBomb(h) {                                          //removing bomb
       cells[h].classList.remove('alienBomb');
 }
-function newLaserInit() {                 //initiates new laser 
+function newLaserInit() {                                       //initiates new laser 
   let initialPos = playerPosit - width;
   lasersPositionsArray.push(initialPos);
   createLaser(initialPos);
@@ -250,7 +250,7 @@ function newBombInit() {              //initiates new bomb
 }}
 
 function moveLasers() {
- setInterval(() => {                                                                  //move all lasers or delete them if flying offscreen
+ setInterval(() => {                                                       //move all lasers or delete them if flying offscreen
     for ( let i = 0; i < cellCount; i++) {
       if (cells[i].classList.contains('playerLaser') && cells[i].classList.contains('rocksClass')) {
         removeLaser(i);
@@ -289,12 +289,12 @@ function moveLasers() {
         createBomb(alienBombPosArray[i]);                      //adds alienBomb class to a cell div with the createBomb function.
       }}}, 170);}
 
-function dropBombs(bombsTiming) {           //time loop that drops bombs from aliens
+function dropBombs(bombsTiming) {                          //time loop that drops bombs from aliens
   let dropingBombs = setInterval(() => {
       newBombInit();                //initiate a new bomb
-    }, bombsTiming)}                 //how often
+    }, bombsTiming)}                                     //how often
 
-function levelChange(x) {               //change level and restart game
+function levelChange(x) {                                    //change level and restart game
   x ++;                                 //for each level change +1
   localStorage.setItem("level", x);     //saves the level number
   localStorage.setItem("bombs", x);     //saves the player name
