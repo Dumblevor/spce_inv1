@@ -364,23 +364,46 @@ function gameScoreOnGO() {          //displayig score on Game Over
   if (gameOver === 1 && playerCurrentHealth > 0) {
       // window.confirm("Level cleared, " + playerNameHtml.innerHTML + "! Your score is " + playerOneScore); 
       modal.style.display = "block"; // show modal
-      let nxtLvlBut = document.createElement("button");
-      nxtLvlBut.classList.add('submit');
-      nxtLvlBut.innerHTML = "PLAY NEXT LEVEL";
-      nxtLvlBut.onclick = function() {
+      let nxtLvlBut = document.createElement("button"); //create button
+      nxtLvlBut.classList.add('submit'); //add class to button for CSS 
+      nxtLvlBut.innerHTML = "PLAY NEXT LEVEL"; //gives instructions to player what's going to happen if they press the button
+      nxtLvlBut.onclick = function() { //button funtion
         nxtLvlBut.remove(); //remove button
         modal.style.display = "none"; // close modal
-        levelChange(currentLevel);
+        levelChange(currentLevel); //update level +1 and run game
       }
-      document.querySelector(".modal-content").innerHTML = "Level cleared, " + playerNameHtml.innerHTML + "! Your score is " + playerOneScore + "!" + "<br></br>";
-      document.querySelector(".modal-content").appendChild(nxtLvlBut);
+      document.querySelector(".modal-content").innerHTML = "Level cleared, " + playerNameHtml.innerHTML + "! Your score is " + playerOneScore + "!"; //displayed text on win 
+      document.querySelector(".modal-content").appendChild(nxtLvlBut); //button element being added to the modal
 
-  // ? levelChange(currentLevel) : resetFun();
   } else if (gameOver === 1 && playerCurrentHealth <= 0) {
-      window.confirm(playerNameHtml.innerHTML + ", you died. Better luck next time. Your score is " + playerOneScore) ? resetFun() : resetFun();
+    modal.style.display = "block"; // show modal
+      let nxtLvlBut = document.createElement("button"); //create button
+      nxtLvlBut.classList.add('submit'); //add class to button for CSS 
+      nxtLvlBut.innerHTML = "PLAY AGAIN"; //gives instructions to player what's going to happen if they press the button
+      nxtLvlBut.onclick = function() { //button funtion
+        nxtLvlBut.remove(); //remove button
+        modal.style.display = "none"; // close modal
+        resetFun(); //restarts game from level 1
+      }
+      document.querySelector(".modal-content").innerHTML = playerNameHtml.innerHTML + ", your ship was destroyed. Better luck next time. Your score is " + playerOneScore + "<br><br>"; //displayed text on win 
+      document.querySelector(".modal-content").appendChild(nxtLvlBut); //button element being added to the modal
+
+      // window.confirm(playerNameHtml.innerHTML + ", you died. Better luck next time. Your score is " + playerOneScore) ? resetFun() : resetFun();
         }
   if (gameOver === 2) {
-      window.confirm(playerNameHtml.innerHTML + ", you lost. Your planet has been invaded. Better luck next time. Your score is " + playerOneScore) ? resetFun() : resetFun();
+    modal.style.display = "block"; // show modal
+      let nxtLvlBut = document.createElement("button"); //create button
+      nxtLvlBut.classList.add('submit'); //add class to button for CSS 
+      nxtLvlBut.innerHTML = "PLAY AGAIN"; //gives instructions to player what's going to happen if they press the button
+      nxtLvlBut.onclick = function() { //button funtion
+        nxtLvlBut.remove(); //remove button
+        modal.style.display = "none"; // close modal
+        resetFun(); //restarts game from level 1
+      }
+      document.querySelector(".modal-content").innerHTML = playerNameHtml.innerHTML + ", you lost. Your planet has been invaded. Better luck next time. Your score is " + playerOneScore + "<br><br>"; //displayed text on win 
+      document.querySelector(".modal-content").appendChild(nxtLvlBut); //button element being added to the modal
+
+    // window.confirm(playerNameHtml.innerHTML + ", you lost. Your planet has been invaded. Better luck next time. Your score is " + playerOneScore) ? resetFun() : resetFun();
     }
           }
 
