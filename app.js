@@ -451,3 +451,7 @@ button1.onclick = function () {                                    //when player
   modal.style.display = "block";                                          // show modal that enquires the player name and saves it
   button1.remove();                                                 //remove button 
 }
+xClose.onclick = function() {
+  modal.style.display = "none";
+  resetFun(); 
+}
