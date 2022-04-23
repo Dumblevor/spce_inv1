@@ -1,55 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Space Invaders 2022 by DV</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <script defer src="app.js" charset="utf-8"></script>
-  
+
 </head>
+
 <body>
   <h1>Invaders 23 - a HTML based video game, emulating the classic Space Invaders.</h1>
   <h2>Credits: Developed by Dimitar, 1 of SEI 23, General Assembly.</h2>
-  <h3>Significant help received from Alex, Michael & Nick (a-z).</h3>  
+  <h3>Significant help received from Alex, Michael & Nick (a-z).</h3>
 
-  <span><img src="assets/animatedLogo.gif" class="logo"></img> 
+
+  <span><img src="assets/animatedLogo.gif" class="logo"></img>
     <p class="instructions">
-    <b>Instructions: </b> <br>
-    Kill all alien invaders. <br><br>
-     Hit space bar to shoot a laser. <br>
-     ⬅ and  ➡ arrow keys navigate ship. <br>
-    Invaders must not reach your planet. <br>
-  
-    </p></span>
-    <div></div>
-  <div class = "game_class">
-
-<div id="myModal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <form class="modalform" name="playerOneForm" >
-    <label for="fname">Enter player name:</label>
-    <input type="text" id="pname" name="pname"><br><br>
-    <hr>
-    <input type="submit" value="START GAME" class="submit">
-  </form>
-  </div>
-</div>
-<hr></hr>
-    <div class="topDisplay">
-      <p style="text-align:center;"><b>Player:</b> <span class='playerName'></span> | <b>Score: </b> <span class="scoreBoard">0</span>
-       | <b>Level:</b> <span class="levelNum">1</span> | <b>Credit(s): </b>1
+      <b>Instructions: </b> <br>
+      Kill all alien invaders. <br><br>
+      Hit space bar to shoot a laser. <br>
+      ⬅ and ➡ arrow keys navigate ship. <br>
+      Invaders must not reach your planet. <br>
     </p>
-    </div> 
-    <hr></hr>
+    <span class="audioplay">
+      <audio controls autoplay>
+        <source src="horse.ogg" type="audio/ogg">
+        <source src="spaceinvaders1.mpeg" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </span>
+  </span>
+  <div></div>
+  <div class="game_class">
+
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <form class="modalform" name="playerOneForm">
+          <label for="fname">Enter player name:</label>
+          <input type="text" id="pname" name="pname"><br><br>
+          <hr>
+          <input type="submit" value="START GAME" class="submit">
+        </form>
+      </div>
+    </div>
+    <hr>
+    </hr>
+    <div class="topDisplay">
+      <p style="text-align:center;"><b>Player:</b> <span class='playerName'></span> | <b>Score: </b> <span
+          class="scoreBoard">0</span>
+        | <b>Level:</b> <span class="levelNum">1</span> | <b>Credit(s): </b>1
+      </p>
+    </div>
+    <hr>
+    </hr>
 
 
     <div class="grid">
 
     </div>
-    <hr></hr>
-  
-  </body>
+    <hr>
+    </hr>
+
+</body>
 
 </html>

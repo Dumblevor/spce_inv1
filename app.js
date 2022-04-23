@@ -40,11 +40,24 @@ function bombsTimingUpdate(levelX) {
   bombsTiming = bombsTiming * ((100 - (10 * levelX)) / 100); //boosts bombing speed on every level (by lowering the interval)
 }
 
-function damagePlayer() {                                         //damage player 
-  for (let i = 0; i < cellCount; i++) {
+function damagePlayer() {
+
+  for (let i = 0; i < cellCount; i++) {    //damage player 
     if (cells[i].classList.contains('alienBomb') && cells[i].classList.contains('playerShip')) {
       cells[i].classList.remove('playerShip');
       cells[i].classList.add('supernova');
+      cells[i + 1].classList.add('explosion'); //explosion
+      cells[i + 2].classList.add('explosion'); //explosion
+      cells[i - 1].classList.add('explosion'); //explosion
+      cells[i - 2].classList.add('explosion'); //explosion
+      cells[i + width].classList.add('explosion'); //explosion
+      cells[i - width].classList.add('explosion'); //explosion
+      cells[i + width + 1].classList.add('explosion'); //explosion
+      cells[i + width - 1].classList.add('explosion'); //explosion
+      cells[i - width - 1].classList.add('explosion'); //explosion
+      cells[i - width + 1].classList.add('explosion'); //explosion
+      cells[i - width * 2].classList.add('explosion'); //explosion
+      cells[speedPos].classList.remove('speed'); 
       playerCurrentHealth -= 1;
       playerCurrentHealth === 0 ? gameOver = 1 : gameOver = 0;
       gameScoreOnGO();
