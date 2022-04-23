@@ -280,3 +280,10 @@ h2 {
 h3 {
   display: none;
 }
+
+.supernova {
+  background-image: url('assets/supernova.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}

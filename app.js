@@ -44,6 +44,7 @@ function damagePlayer() {                                         //damage playe
   for (let i = 0; i < cellCount; i++) {
     if (cells[i].classList.contains('alienBomb') && cells[i].classList.contains('playerShip')) {
       cells[i].classList.remove('playerShip');
+      cells[i].classList.add('supernova');
       playerCurrentHealth -= 1;
       playerCurrentHealth === 0 ? gameOver = 1 : gameOver = 0;
       gameScoreOnGO();
