@@ -12,10 +12,11 @@ const modalForm = document.querySelector(".modalform");
 const explodeAudio = new Audio('explosion.wav');
 const invaderDeathAudio = new Audio('invaderkilled.wav');
 const shotAudio = new Audio('shoot.wav');
+shotAudio.volume = 0.5;
+invaderDeathAudio.volume = 0.5;
+explodeAudio.volume = 0.7;
 
-explodeAudio.play();
-invaderDeathAudio.play();
-shotAudio.play();
+
 
 const width = 20;
 let currentLevel = 1;

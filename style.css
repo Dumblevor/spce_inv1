@@ -187,7 +187,6 @@ body {
   100% {
     background-image: url('assets/10.png');
   }
-
 }
 
 .modal {
@@ -321,4 +320,17 @@ h3 {
   text-align: center;
   display: block;
   margin: auto;
+}
+
+
+.audioControls {
+  background-color: white;
+  display: block;
+  text-align: left;
+  border-radius: 15px;
+  padding: 14px;
+  margin: 20px;
+  width: 300px;
+  height: 100px;
+
 }
