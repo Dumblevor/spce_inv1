@@ -15,9 +15,6 @@ const shotAudio = new Audio('shoot.wav');
 shotAudio.volume = 0.5;
 invaderDeathAudio.volume = 0.5;
 explodeAudio.volume = 0.7;
-
-
-
 const width = 20;
 let currentLevel = 1;
 let playerOneScore = 0;                                     //keeps track of player 1 score
@@ -49,7 +46,6 @@ function bombsTimingUpdate(levelX) {
 }
 
 function damagePlayer() {
-
   for (let i = 0; i < cellCount; i++) {    //damage player 
     if (cells[i].classList.contains('alienBomb') && cells[i].classList.contains('playerShip')) {
       cells[i].classList.remove('playerShip');
@@ -97,7 +93,7 @@ function damageAlien() {                                            //damage ali
       const result = lasersPositionsArray.indexOf(i);
       lasersPositionsArray.splice(result, 1);
       gameScoreOnGO();
-    invaderDeathAudio.play();
+      invaderDeathAudio.play();
     } else if (cells[i].classList.contains('alienShip3') && cells[i].classList.contains('playerLaser')) {
       cells[i].classList.remove('alienShip3');
       const result3 = aliensPosArray3.indexOf(i);
@@ -108,7 +104,7 @@ function damageAlien() {                                            //damage ali
       const result = lasersPositionsArray.indexOf(i);
       lasersPositionsArray.splice(result, 1);
       gameScoreOnGO();
-    invaderDeathAudio.play();
+      invaderDeathAudio.play();
     }
   }
 }
