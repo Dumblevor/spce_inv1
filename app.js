@@ -7,8 +7,7 @@ const scoreBoard = document.querySelector('.scoreBoard');
 const levelNum = document.querySelector('.levelNum');
 const playerNameHtml = document.querySelector('.playerName');
 const modal = document.getElementById("myModal");
-let button1 = document.querySelector('.button1');
-const span = document.getElementsByClassName("close")[0]; // Get the <span> element that closes the modal
+const xClose = document.getElementsByClassName("close")[0]; // Get the <span> element that closes the modal
 const modalForm = document.querySelector(".modalform");
 const submit = document.querySelector(".submit");
 const width = 20;
@@ -400,6 +399,7 @@ function gameInit() {                                                    //initi
 }   
 
 makeButtons();
+let button1 = document.querySelector('.button1');
 
 modalForm.onsubmit = function() {                                          // When the user submits, close the modal, set name, start game
   playerNameHtml.innerHTML = document.forms["playerOneForm"]["pname"].value;
