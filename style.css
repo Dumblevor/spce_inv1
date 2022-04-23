@@ -288,6 +288,7 @@ h3 {
   background-position: center;
   animation: rotation2 5s infinite linear;
 }
+
 .explosion {
   background-image: url('assets/stars.png');
   background-size: contain;
@@ -295,25 +296,29 @@ h3 {
   background-position: center;
   animation: rotation 7s infinite linear;
 }
+
 @keyframes rotation {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(359deg);
   }
 }
+
 @keyframes rotation2 {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(-359deg);
   }
 }
 
 .audioplay {
-text-align: center;
-display: block;
-margin: auto;
+  text-align: center;
+  display: block;
+  margin: auto;
 }

@@ -56,7 +56,7 @@ function damagePlayer() {
       cells[i - width - 1].classList.add('explosion'); //explosion
       cells[i - width + 1].classList.add('explosion'); //explosion
       cells[i - width * 2].classList.add('explosion'); //explosion
-      cells[speedPos].classList.remove('speed'); 
+      cells[speedPos].classList.remove('speed');
       playerCurrentHealth -= 1;
       playerCurrentHealth === 0 ? gameOver = 1 : gameOver = 0;
       gameScoreOnGO();
