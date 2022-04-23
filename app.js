@@ -9,7 +9,7 @@ const playerNameHtml = document.querySelector('.playerName');
 const modal = document.getElementById("myModal");
 const xClose = document.getElementsByClassName("close")[0]; // Get the <span> element that closes the modal
 const modalForm = document.querySelector(".modalform");
-const submit = document.querySelector(".submit");
+// const submit = document.querySelector(".submit");
 const width = 20;
 let currentLevel = 1;
 let playerOneScore = 0;                                     //keeps track of player 1 score
@@ -21,14 +21,14 @@ const cellCount = width * height;
 let playerPosit = cellCount - width * 3 / 2;                //bottom screen, middle;
 let speedPos = playerPosit + width;
 let playerLaserLoc = playerPosit;
-let nextLaserLoc = playerLaserLoc - width;
-let cells = [];
-let lasersPositionsArray = [];
-let aliensPosArray1 = [];
-let aliensPosArray2 = [];
-let aliensPosArray3 = [];
-let alienBombPosArray = [];
-let rocksPositions = [];
+const nextLaserLoc = playerLaserLoc - width;
+const cells = [];
+const lasersPositionsArray = [];
+const aliensPosArray1 = [];
+const aliensPosArray2 = [];
+const aliensPosArray3 = [];
+const alienBombPosArray = [];
+const rocksPositions = [];
 scoreBoard.innerHTML = playerOneScore;
 
 function updateLvlOnStart(x) {
@@ -55,32 +55,32 @@ function damageAlien() {                                            //damage ali
   for (let i = 0; i < cellCount; i++) {
     if (cells[i].classList.contains('alienShip') && cells[i].classList.contains('playerLaser')) {
       cells[i].classList.remove('alienShip');
-      let result1 = aliensPosArray1.indexOf(i);
+      const result1 = aliensPosArray1.indexOf(i);
       aliensPosArray1.splice(result1, 1);
       playerOneScore = playerOneScore + Number(currentLevel);
       scoreBoard.innerHTML = playerOneScore;
       removeLaser(i);
-      let result = lasersPositionsArray.indexOf(i);
+      const result = lasersPositionsArray.indexOf(i);
       lasersPositionsArray.splice(result, 1);
       gameScoreOnGO();
     } else if (cells[i].classList.contains('alienShip2') && cells[i].classList.contains('playerLaser')) {
       cells[i].classList.remove('alienShip2');
-      let result2 = aliensPosArray2.indexOf(i);
+      const result2 = aliensPosArray2.indexOf(i);
       aliensPosArray2.splice(result2, 1);
       playerOneScore = playerOneScore + Number(currentLevel);
       scoreBoard.innerHTML = playerOneScore;
       removeLaser(i);
-      let result = lasersPositionsArray.indexOf(i);
+      const result = lasersPositionsArray.indexOf(i);
       lasersPositionsArray.splice(result, 1);
       gameScoreOnGO();
     } else if (cells[i].classList.contains('alienShip3') && cells[i].classList.contains('playerLaser')) {
       cells[i].classList.remove('alienShip3');
-      let result3 = aliensPosArray3.indexOf(i);
+      const result3 = aliensPosArray3.indexOf(i);
       aliensPosArray3.splice(result3, 1);
       playerOneScore = playerOneScore + Number(currentLevel);
       scoreBoard.innerHTML = playerOneScore;
       removeLaser(i);
-      let result = lasersPositionsArray.indexOf(i);
+      const result = lasersPositionsArray.indexOf(i);
       lasersPositionsArray.splice(result, 1);
       gameScoreOnGO();
     }
@@ -124,7 +124,7 @@ function createRocks() {                                          //create all t
 
 
 function createAliens(x) {                                                        //create all the aliens
-  let z = 4 + x;
+  const z = 4 + x;
   for (let i = 0; i < z; i++) {                                                    //add aliens
     cells[2 + i * 2].classList.add('alienShip');                                  //creates 1st set of aliens
     aliensPosArray1.push(2 + i * 2);
@@ -173,7 +173,7 @@ function moveAliensLeft() {                                                    /
 
 function moveFourRight() {                                                 //move aliens right 3 times every 500 miliseconds
   let movement = 0;
-  let moveAliens = setInterval(() => {
+  const moveAliens = setInterval(() => {
     if (movement < 4 && playerCurrentHealth > 0) {
       moveAliensRight();
       movement++;
@@ -188,7 +188,7 @@ function moveFourRight() {                                                 //mov
 
 function moveFourLeft() {                                                     //move aliens left 3 times every 500 miliseconds
   let movement1 = 0;
-  let moveAliens = setInterval(() => {
+  const moveAliens = setInterval(() => {
     if (movement1 < 4 && playerCurrentHealth > 0) {
       moveAliensLeft();
       movement1++;
@@ -255,16 +255,16 @@ function removeBomb(h) {                                          //removing bom
   cells[h].classList.remove('alienBomb');
 }
 function newLaserInit() {                                       //initiates new laser 
-  let initialPos = playerPosit - width;
+  const initialPos = playerPosit - width;
   lasersPositionsArray.push(initialPos);
   createLaser(initialPos);
 }
 function newBombInit() {              //initiates new bomb 
   let randomAlienNum = 0;
-  let allAliens = aliensPosArray1.concat(aliensPosArray2, aliensPosArray3);                  //alien arrays together
+  const allAliens = aliensPosArray1.concat(aliensPosArray2, aliensPosArray3);                  //alien arrays together
   randomAlienNum = Math.floor((Math.random() * allAliens.length));                   //randomize an alien number
-  let randomAlien = allAliens[randomAlienNum];
-  let initialBombPos = randomAlien + width; //determine bomb position 
+  const randomAlien = allAliens[randomAlienNum];
+  const initialBombPos = randomAlien + width; //determine bomb position 
   if (initialBombPos < 400) {                //experiment
     alienBombPosArray.push(initialBombPos);
     createBomb(initialBombPos);
@@ -276,7 +276,7 @@ function moveLasers() {
     for (let i = 0; i < cellCount; i++) {
       if (cells[i].classList.contains('playerLaser') && cells[i].classList.contains('rocksClass')) {
         removeLaser(i);
-        let result = lasersPositionsArray.indexOf(i);
+        const result = lasersPositionsArray.indexOf(i);
         lasersPositionsArray.splice(result, 1);
       }
     }
@@ -296,11 +296,11 @@ function moveLasers() {
 
 function moveBombs() {
   setInterval(() => {                                                 //move all bombs or delete them if flying offscreen
-    let allAliens = aliensPosArray1.concat(aliensPosArray2, aliensPosArray3);
+    const allAliens = aliensPosArray1.concat(aliensPosArray2, aliensPosArray3);
     for (let i = 0; i < cellCount; i++) {
       if (cells[i].classList.contains('rocksClass') && cells[i].classList.contains('alienBomb')) {
         removeBomb(i);                                                // remove bomb if it hits rock
-        let result = alienBombPosArray.indexOf(i);
+        const result = alienBombPosArray.indexOf(i);
         alienBombPosArray.splice(result, 1);
       }
     }
@@ -318,7 +318,7 @@ function moveBombs() {
 }
 
 function dropBombs(bombsTiming) {                          //time loop that drops bombs from aliens
-  let dropingBombs = setInterval(() => {
+  const dropingBombs = setInterval(() => {
     newBombInit();                //initiate a new bomb
   }, bombsTiming)
 }                                     //how often
@@ -348,13 +348,13 @@ function checkRocks() {
 }
 
 function gameScoreOnGO() {                                       //displayig score on Game Over
-  let allAliens = aliensPosArray1.concat(aliensPosArray2, aliensPosArray3);
+  const allAliens = aliensPosArray1.concat(aliensPosArray2, aliensPosArray3);
   if (allAliens == 0) {
     gameOver = 1;
   }
   if (gameOver === 1 && playerCurrentHealth > 0) {
     modal.style.display = "block";                            // show modal
-    let nxtLvlBut = document.createElement("button");         //create button
+    const nxtLvlBut = document.createElement("button");         //create button
     nxtLvlBut.classList.add('submit');                        //add class to button for CSS 
     nxtLvlBut.innerHTML = "PLAY NEXT LEVEL";                  //gives instructions to player what's going to happen if they press the button
     nxtLvlBut.onclick = function () {                          //button funtion
@@ -362,7 +362,7 @@ function gameScoreOnGO() {                                       //displayig sco
       modal.style.display = "none";                           // close modal
       levelChange(currentLevel);                          //update level +1 and run game
     }
-    document.querySelector(".modal-content").innerHTML = "Level cleared, " + playerNameHtml.innerHTML + "! Your score is " + playerOneScore + "!"; //displayed text on win 
+    document.querySelector(".modal-content").innerHTML = "Level cleared, " + playerNameHtml.innerHTML + "! Your score is " + playerOneScore + "!<br><br>"; //displayed text on win 
     document.querySelector(".modal-content").appendChild(nxtLvlBut); //button element being added to the modal
     document.addEventListener('keydown', (event) => {
       if (event.code === 'Enter') {
@@ -371,7 +371,7 @@ function gameScoreOnGO() {                                       //displayig sco
     })
   } else if (gameOver === 1 && playerCurrentHealth <= 0) {
     modal.style.display = "block"; // show modal
-    let nxtLvlBut = document.createElement("button"); //create button
+    const nxtLvlBut = document.createElement("button"); //create button
     nxtLvlBut.classList.add('submit');              //add class to button for CSS 
     nxtLvlBut.innerHTML = "PLAY AGAIN";             //gives instructions to player what's going to happen if they press the button
     nxtLvlBut.onclick = function () {                //button funtion
@@ -391,7 +391,7 @@ function gameScoreOnGO() {                                       //displayig sco
 
   if (gameOver === 2) {
     modal.style.display = "block";                                 // show modal
-    let nxtLvlBut = document.createElement("button");           //create button
+    const nxtLvlBut = document.createElement("button");           //create button
     nxtLvlBut.classList.add('submit');                          //add class to button for CSS 
     nxtLvlBut.innerHTML = "PLAY AGAIN";                         //gives instructions to player what's going to happen if they press the button
     nxtLvlBut.onclick = function () {                            //button funtion
@@ -411,14 +411,14 @@ function gameScoreOnGO() {                                       //displayig sco
 }
 
 function addEventListeners() {
-  let detectSpacePress4Laser = document.addEventListener('keydown', (event) => { //spacebar hit detection
+  const detectSpacePress4Laser = document.addEventListener('keydown', (event) => { //spacebar hit detection
     event.preventDefault();
     if (event.code === 'Space') {
       newLaserInit();                                                           // new laser initialization
     }
   })
 
-  let playerMove = document.addEventListener('keydown', (event) => {               //player move around
+  const playerMove = document.addEventListener('keydown', (event) => {               //player move around
     removePlayerShip();                                                             //remove player ship + speed animation
     if (event.code === 'ArrowRight' && playerPosit < (cellCount - width - 1)) { //move right on key left arrow and not going out of screen
       playerPosit += 1;
@@ -434,7 +434,7 @@ function addEventListeners() {
 
 function gameInit() {                                                    //initiates games basically, calls all initial functions
   if (localStorage.getItem("level") != null) {
-    updateLvlOnStart(localStorage.getItem("level"),);
+    updateLvlOnStart(localStorage.getItem("level"));
   }                //update level from local storage
   playerNameHtml.innerHTML = localStorage.getItem("playerName");    //update name from local storage
   makeGrid();
@@ -451,7 +451,7 @@ function gameInit() {                                                    //initi
 }
 
 makeButtons();
-let button1 = document.querySelector('.button1');
+const button1 = document.querySelector('.button1');
 
 modalForm.onsubmit = function () {                                          // When the user submits, close the modal, set name, start game
   playerNameHtml.innerHTML = document.forms["playerOneForm"]["pname"].value;
