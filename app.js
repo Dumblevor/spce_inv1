@@ -368,6 +368,15 @@ let detectSpacePress4Laser = document.addEventListener('keydown', (event) =>{ //
     newLaserInit();                                                           // new laser initialization
   }})
 
+  let detectEnterPress = document.addEventListener('keydown', (event) =>{ //spacebar hit detection
+    event.preventDefault();
+    if (event.code === 'Enter') {
+      nxtLvlBut.remove();                                   //remove button
+      modal.style.display = "none";                           // close modal
+      levelChange(currentLevel);                          //update level +1 and run game
+    }
+  })
+
 let playerMove = document.addEventListener('keydown', (event) =>{               //player move around
   removePlayerShip();                                                             //remove player ship + speed animation
       if (event.code === 'ArrowRight' && playerPosit < (cellCount - width - 1)) { //move right on key left arrow and not going out of screen
@@ -421,3 +430,4 @@ button1.onclick = function() {                                    //when player 
   modal.style.display = "block";                                          // show modal that enquires the player name and saves it
   button1.remove();                                                 //remove button 
 }
+
