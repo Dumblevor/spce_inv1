@@ -107,7 +107,7 @@ function makeButtons() {                                                  // mak
     button1.innerHTML = 'PLAY';
     grid.appendChild(button1);
     document.addEventListener('keydown', (event) => {
-      if (event.code === 'Enter' && modal.style.display === "block") {
+      if (event.code === 'Enter' && cells.length < 1) {
         button1.click();
       }
     }
@@ -473,10 +473,10 @@ window.onclick = function (event) {                                             
 button1.onclick = function () {                                    //when player clicks the button to start the game 
   modal.style.display = "block";                                          // show modal that enquires the player name and saves it
   button1.remove();                                                 //remove button 
-
 }
 
 xClose.onclick = function () {
   modal.style.display = "none";
+  resetFun();
 }
 
