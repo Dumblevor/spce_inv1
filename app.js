@@ -45,7 +45,7 @@ function damagePlayer() {                                         //damage playe
     if (cells[i].classList.contains('alienBomb') && cells[i].classList.contains('playerShip')) {
       cells[i].classList.remove('playerShip');
       playerCurrentHealth -= 1;
-      playerCurrentHealth == 0 ? gameOver = 1 : gameOver = 0;
+      playerCurrentHealth === 0 ? gameOver = 1 : gameOver = 0;
       gameScoreOnGO();
     }
   }
@@ -103,6 +103,7 @@ function makeButtons() {                                                  // mak
   } else {
     const button1 = document.createElement("button");
     button1.classList.add('button');
+    button1.classList.add('button1');
     button1.innerHTML = 'PLAY';
     grid.appendChild(button1);
   }
@@ -178,8 +179,6 @@ function moveFourRight() {                                                 //mov
     }
   }, 500)
 }
-
-
 
 function moveFourLeft() {                                                     //move aliens left 3 times every 500 miliseconds
   let movement1 = 0;
@@ -348,7 +347,6 @@ function gameScoreOnGO() {                                       //displayig sco
     gameOver = 1;
   }
   if (gameOver === 1 && playerCurrentHealth > 0) {
-
     modal.style.display = "block";                            // show modal
     let nxtLvlBut = document.createElement("button");         //create button
     nxtLvlBut.classList.add('submit');                        //add class to button for CSS 
@@ -360,6 +358,7 @@ function gameScoreOnGO() {                                       //displayig sco
     }
     document.querySelector(".modal-content").innerHTML = "Level cleared, " + playerNameHtml.innerHTML + "! Your score is " + playerOneScore + "!"; //displayed text on win 
     document.querySelector(".modal-content").appendChild(nxtLvlBut); //button element being added to the modal
+    
   } else if (gameOver === 1 && playerCurrentHealth <= 0) {
     modal.style.display = "block"; // show modal
     let nxtLvlBut = document.createElement("button"); //create button
@@ -396,15 +395,16 @@ function addEventListeners() {
     }
   })
 
-  let detectEnterPress = document.addEventListener('keydown', (event) => { //spacebar hit detection
-    event.preventDefault();
-    if (event.code === 'Enter') {
+  // let enterPress = document.addEventListener('keydown', (event) => {
+  //   event.preventDefault();
+  //   if (event.code === 'Enter') {
+    
 
-      document.createElement("button").remove();                                   //remove button
-      modal.style.display = "none";                           // close modal
-      levelChange(currentLevel);                          //update level +1 and run game
-    }
-  })
+  //   }
+  // })
+
+
+
 
   let playerMove = document.addEventListener('keydown', (event) => {               //player move around
     removePlayerShip();                                                             //remove player ship + speed animation
@@ -462,4 +462,3 @@ button1.onclick = function () {                                    //when player
   modal.style.display = "block";                                          // show modal that enquires the player name and saves it
   button1.remove();                                                 //remove button 
 }
-
