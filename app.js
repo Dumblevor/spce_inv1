@@ -106,6 +106,12 @@ function makeButtons() {                                                  // mak
     button1.classList.add('button1');
     button1.innerHTML = 'PLAY';
     grid.appendChild(button1);
+    document.addEventListener('keydown', (event) => {
+      if (event.code === 'Enter' && modal.style.display === "block") {
+        button1.click();
+      }
+    }
+    )
   }
 }
 
@@ -358,7 +364,11 @@ function gameScoreOnGO() {                                       //displayig sco
     }
     document.querySelector(".modal-content").innerHTML = "Level cleared, " + playerNameHtml.innerHTML + "! Your score is " + playerOneScore + "!"; //displayed text on win 
     document.querySelector(".modal-content").appendChild(nxtLvlBut); //button element being added to the modal
-    
+    document.addEventListener('keydown', (event) => {
+      if (event.code === 'Enter') {
+        nxtLvlBut.click();
+      }
+    })
   } else if (gameOver === 1 && playerCurrentHealth <= 0) {
     modal.style.display = "block"; // show modal
     let nxtLvlBut = document.createElement("button"); //create button
@@ -371,7 +381,14 @@ function gameScoreOnGO() {                                       //displayig sco
     }
     document.querySelector(".modal-content").innerHTML = playerNameHtml.innerHTML + ", your ship was destroyed. Better luck next time. Your score is " + playerOneScore + "<br><br>"; //displayed text on win 
     document.querySelector(".modal-content").appendChild(nxtLvlBut); //button element being added to the modal
+    document.addEventListener('keydown', (event) => {
+      if (event.code === 'Enter') {
+        nxtLvlBut.click();
+      }
+    }
+    )
   }
+
   if (gameOver === 2) {
     modal.style.display = "block";                                 // show modal
     let nxtLvlBut = document.createElement("button");           //create button
@@ -384,6 +401,12 @@ function gameScoreOnGO() {                                       //displayig sco
     }
     document.querySelector(".modal-content").innerHTML = playerNameHtml.innerHTML + ", you lost. Your planet has been invaded. Better luck next time. Your score is " + playerOneScore + "<br><br>"; //displayed text on win 
     document.querySelector(".modal-content").appendChild(nxtLvlBut); //button element being added to the modal
+    document.addEventListener('keydown', (event) => {
+      if (event.code === 'Enter') {
+        nxtLvlBut.click();
+      }
+    }
+    )
   }
 }
 
@@ -450,8 +473,10 @@ window.onclick = function (event) {                                             
 button1.onclick = function () {                                    //when player clicks the button to start the game 
   modal.style.display = "block";                                          // show modal that enquires the player name and saves it
   button1.remove();                                                 //remove button 
+
 }
-xClose.onclick = function() {
+
+xClose.onclick = function () {
   modal.style.display = "none";
-  resetFun(); 
 }
+

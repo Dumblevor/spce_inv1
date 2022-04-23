@@ -1,4 +1,4 @@
-body{
+body {
   height: 100vh;
   margin: 15px;
   box-sizing: border-box;
@@ -9,17 +9,17 @@ body{
   background-repeat: no-repeat;
 }
 
-.playerLaser{
+.playerLaser {
   background-image: url('assets/alienLaser.png');
   background-size: 90%;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-.playerShip{
+.playerShip {
   background-image: url('assets/final-player.png');
   background-size: contain;
-  background-repeat: no-repeat ;
+  background-repeat: no-repeat;
   background-position: center;
 
 }
@@ -27,7 +27,7 @@ body{
 .alienShip {
   background-image: url('assets/invaderType3.png');
   background-size: contain;
-  background-repeat: no-repeat ;
+  background-repeat: no-repeat;
   background-position: center;
 
 }
@@ -35,20 +35,21 @@ body{
 .alienShip2 {
   background-image: url('assets/invaderType2.png');
   background-size: contain;
-  background-repeat: no-repeat ;
+  background-repeat: no-repeat;
   background-position: center;
 }
+
 .alienShip3 {
   background-image: url('assets/star-wars.png');
   background-size: contain;
-  background-repeat: no-repeat ;
+  background-repeat: no-repeat;
   background-position: center;
 }
 
 .alienBomb {
   background-image: url('assets/torpedo-3.png');
   background-size: contain;
-  background-repeat: no-repeat ;
+  background-repeat: no-repeat;
   background-position: center;
   background-size: 30px;
 }
@@ -62,12 +63,13 @@ body{
 }
 
 .topDisplay {
-background-color: rgba(255, 255, 255, 0.85);
-color: black;
-padding: 5px;
-justify-content: center;
-border-radius: 15px;
-margin: 5px;
+  background-color: rgba(255, 255, 255, 0.85);
+  color: black;
+  padding: 5px;
+  justify-content: center;
+  border-radius: 15px;
+  margin: 5px;
+  word-spacing: 30px;
 }
 
 .game_class {
@@ -87,6 +89,7 @@ margin: 5px;
   background-color: rgba(255, 255, 255, 0.45);
   border-radius: 15px;
 }
+
 .grid div {
   flex-grow: 1;
   height: 5%;
@@ -94,12 +97,13 @@ margin: 5px;
   max-height: 5%;
   max-width: 5%;
 }
+
 .instructions {
-background-color: white;
-text-align: left;
-padding: 10px;
-border-radius: 15px;
-margin: 20px;
+  background-color: white;
+  text-align: left;
+  padding: 10px;
+  border-radius: 15px;
+  margin: 20px;
 }
 
 .button {
@@ -127,6 +131,7 @@ margin: 20px;
   margin: 50px;
 
 }
+
 /* 
 .speed {
   background-size: cover;
@@ -137,46 +142,85 @@ margin: 20px;
 .speed {
 
   background-size: contain;
-  background-repeat: no-repeat ;
+  background-repeat: no-repeat;
   background-position: center;
   animation: speedMove 1s infinite;
 }
 
 @keyframes speedMove {
-  0%   {background-image: url('assets/1.png');}
-  11%  {background-image: url('assets/2.png');}
-  22%  {background-image: url('assets/3.png');}
-  33%  {background-image: url('assets/4.png');}
-  44%  {background-image: url('assets/5.png');}
-  55%  {background-image: url('assets/6.png');}
-  66%  {background-image: url('assets/7.png');}
-  78%  {background-image: url('assets/8.png');}
-  90%  {background-image: url('assets/9.png');}
-  100%  {background-image: url('assets/10.png');}
+  0% {
+    background-image: url('assets/1.png');
+  }
+
+  11% {
+    background-image: url('assets/2.png');
+  }
+
+  22% {
+    background-image: url('assets/3.png');
+  }
+
+  33% {
+    background-image: url('assets/4.png');
+  }
+
+  44% {
+    background-image: url('assets/5.png');
+  }
+
+  55% {
+    background-image: url('assets/6.png');
+  }
+
+  66% {
+    background-image: url('assets/7.png');
+  }
+
+  78% {
+    background-image: url('assets/8.png');
+  }
+
+  90% {
+    background-image: url('assets/9.png');
+  }
+
+  100% {
+    background-image: url('assets/10.png');
+  }
 
 }
 
 
 /* The Modal (background) */
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
 }
 
 /* Modal Content/Box */
 .modal-content {
   background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
+  margin: 15% auto;
+  /* 15% from the top and centered */
   padding: 20px;
-  width: 50%; /* Could be more or less, depending on screen size */
+  width: 50%;
+  /* Could be more or less, depending on screen size */
   text-align: center;
   border-radius: 15px;
   background-color: rgba(255, 255, 255, 0.75);
@@ -210,9 +254,10 @@ margin: 20px;
   border: 2px solid black;
   background-color: black;
   color: white;
-  font-weight:400;
+  font-weight: 400;
   padding: 5px 15px 5px 15px;
 }
+
 .submit:hover {
   background-color: white;
   color: black;
@@ -225,12 +270,15 @@ hr {
   border: 0.5px solid white;
   border-radius: 15px;
 }
+
 h1 {
   display: none;
 }
+
 h2 {
   display: none;
 }
+
 h3 {
   display: none;
 }
