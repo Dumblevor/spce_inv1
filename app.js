@@ -395,17 +395,6 @@ function addEventListeners() {
     }
   })
 
-  // let enterPress = document.addEventListener('keydown', (event) => {
-  //   event.preventDefault();
-  //   if (event.code === 'Enter') {
-    
-
-  //   }
-  // })
-
-
-
-
   let playerMove = document.addEventListener('keydown', (event) => {               //player move around
     removePlayerShip();                                                             //remove player ship + speed animation
     if (event.code === 'ArrowRight' && playerPosit < (cellCount - width - 1)) { //move right on key left arrow and not going out of screen
