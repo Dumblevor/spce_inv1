@@ -9,6 +9,14 @@ const playerNameHtml = document.querySelector('.playerName');
 const modal = document.getElementById("myModal");
 const xClose = document.getElementsByClassName("close")[0]; // Get the <span> element that closes the modal
 const modalForm = document.querySelector(".modalform");
+const explodeAudio = new Audio('explosion.wav');
+const invaderDeathAudio = new Audio('invaderkilled.wav');
+const shotAudio = new Audio('shoot.wav');
+
+explodeAudio.play();
+invaderDeathAudio.play();
+shotAudio.play();
+
 const width = 20;
 let currentLevel = 1;
 let playerOneScore = 0;                                     //keeps track of player 1 score
@@ -58,6 +66,7 @@ function damagePlayer() {
       cells[i - width * 2].classList.add('explosion'); //explosion
       cells[speedPos].classList.remove('speed');
       playerCurrentHealth -= 1;
+      explodeAudio.play();
       playerCurrentHealth === 0 ? gameOver = 1 : gameOver = 0;
       gameScoreOnGO();
     }
@@ -76,6 +85,7 @@ function damageAlien() {                                            //damage ali
       const result = lasersPositionsArray.indexOf(i);
       lasersPositionsArray.splice(result, 1);
       gameScoreOnGO();
+      invaderDeathAudio.play();
     } else if (cells[i].classList.contains('alienShip2') && cells[i].classList.contains('playerLaser')) {
       cells[i].classList.remove('alienShip2');
       const result2 = aliensPosArray2.indexOf(i);
@@ -86,6 +96,7 @@ function damageAlien() {                                            //damage ali
       const result = lasersPositionsArray.indexOf(i);
       lasersPositionsArray.splice(result, 1);
       gameScoreOnGO();
+    invaderDeathAudio.play();
     } else if (cells[i].classList.contains('alienShip3') && cells[i].classList.contains('playerLaser')) {
       cells[i].classList.remove('alienShip3');
       const result3 = aliensPosArray3.indexOf(i);
@@ -96,6 +107,7 @@ function damageAlien() {                                            //damage ali
       const result = lasersPositionsArray.indexOf(i);
       lasersPositionsArray.splice(result, 1);
       gameScoreOnGO();
+    invaderDeathAudio.play();
     }
   }
 }
@@ -271,6 +283,7 @@ function newLaserInit() {                                       //initiates new 
   const initialPos = playerPosit - width;
   lasersPositionsArray.push(initialPos);
   createLaser(initialPos);
+  shotAudio.play();
 }
 function newBombInit() {              //initiates new bomb 
   let randomAlienNum = 0;
