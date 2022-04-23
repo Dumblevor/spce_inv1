@@ -9,7 +9,6 @@ const playerNameHtml = document.querySelector('.playerName');
 const modal = document.getElementById("myModal");
 const xClose = document.getElementsByClassName("close")[0]; // Get the <span> element that closes the modal
 const modalForm = document.querySelector(".modalform");
-// const submit = document.querySelector(".submit");
 const width = 20;
 let currentLevel = 1;
 let playerOneScore = 0;                                     //keeps track of player 1 score
@@ -480,7 +479,7 @@ window.onclick = function (event) {                                             
     playerNameHtml.innerHTML = document.forms["playerOneForm"]["pname"].value;
     localStorage.setItem("playerName", playerNameHtml.innerHTML);
     modal.style.display = "none";                                                 // close modal
-    gameInit();                                                           //start game
+    gameInit();                                                         //start game
   }
 }
 
