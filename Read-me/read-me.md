@@ -1,4 +1,6 @@
-### ![Invaders 23 by Dimitar Vidolov](https://dumblevor.github.io/spce_inv1/assets/animatedLogo.gif) Dimitar Vidolov, Software Engineered this.
+### ![Invaders 23 by Dimitar Vidolov](https://dumblevor.github.io/spce_inv1/assets/animatedLogo.gif)
+Dimitar Vidolov, Software Engineered this.
+
 # Invaders 23
  
 
@@ -38,7 +40,8 @@ None of the elements (aliens, rocks, player's ship, etc.) are hard hardcoded, bu
 The end of movement of the aliens to the right starts the movement to the left. 
 Player's lasers and aliens' bombs move with intervals, new bombs deployment speeds up on level change.
 Level changes are stored in local storage.
-Variables are grouped in the beginning, followed by all the functions needed, gameInit() starts the game and it is followed by the modal for the player's name and win screen. 
+Variables are grouped in the beginning, followed by all the functions needed, gameInit() starts the game and it is followed by the modal for the player's name and win screen.
+Hitting the enter acts as clicking the button for next level/play again/enter name.
 
 ### Bits & bobs
 Lasers dissapear on collision with aliens, when they reach the end of the screen and when they hit a rock (most of the time, see cheat code below).
