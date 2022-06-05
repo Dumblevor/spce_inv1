@@ -1,6 +1,3 @@
-whiteboard: https://bit.ly/3iWdhZc
-
-
 ### ![Invaders 23 by Dimitar Vidolov](https://dumblevor.github.io/spce_inv1/assets/animatedLogo.gif) Dimitar Vidolov, Software Engineered this.
 # Invaders 23
  
@@ -9,262 +6,46 @@ whiteboard: https://bit.ly/3iWdhZc
 
 First project as part of the software engineering immersive course at GA London. The assignment was to create a grid-based game to be rendered in the browser, using HTML, CSS and JavaScript. The project was to be completed **individually** within **one week**.
 
-Given a list of options from GA, I chose to re-create the classic game **Pac-Man**. Please note that while the game is designed in terms of roombas and cats, this documentation is written in terms of the original Pac-Man lingo, e.g. referring to _ghosts_ and _energizers_, as the underlying code also uses this jargon. 
+Given a list of options from GA, I chose to re-create the classic game **Space Invaders**. 
 
-You can launch the game on GitHub pages [here](https://katheich.github.io/vac-man/), or find the GitHub repo [here](https://github.com/katheich/vac-man).
+You can launch the game on GitHub pages [here](https://dumblevor.github.io/spce_inv1/) and the repo [here](https://github.com/Dumblevor/spce_inv1).
 
 ## Brief
 
 - **Render a game in the browser**
-- **Design logic for winning & visually display which player won**
+- **Design logic for winning & visually display when player wins**
 - **Include separate HTML / CSS / JavaScript files**
-- Stick with **KISS (Keep It Simple Stupid)** and **DRY (Don't Repeat Yourself)** principles
+- Stick with **KISS (Keep It Stupid Simple)** and **DRY (Don't Repeat Yourself)** principles
 - Use **Javascript** for **DOM manipulation**
 - **Deploy your game online**, where the rest of the world can access it
-- Use **semantic markup** for HTML and CSS (adhere to best practices)
+- Use **semantic markup** for HTML and CSS (while adhering to best practices)
 
-## Technologies used ![Sock](/images/sock.png)
+## Technologies used !
 
 - HTML
 - CSS
-- JavaScript (ES6)
+- JavaScript
 - Git and GitHub
-- Photoshop Elements
-- Google Fonts
-- Microsoft Excel
 
 ## Approach
 
-### Board layout 
+Actitivities are broken down into seperate components, hardcoding is kept quite low for the most part.
+The grid is generated (by makeGrid()) with fixed size, elements on the grid are moved by adding and removing classes on the grid with time intervals and I put listeners to detect collisions.
+The location for some of the elements are kept in seperate arrays.
 
-- I decided to use a single array of continuously increasing numbers to track the cells and create two functions that woud allow navigating this array as intended:
-  - `getXY`: for each cell, calculate the X and Y coordinate (used for distance calculations)
-    ```js
-    function getXY(position) {
-      const y = Math.floor(position / width) + 1
-      const x = position % width + 1                                       
+### Elements set-up 
+None of the elements (aliens, rocks, player's ship, etc.) are hard hardcoded, but generated when needed.
+The end of movement of the aliens to the right starts the movement to the left. 
+Player's lasers and aliens' bombs move with intervals, new bombs deployment speeds up on level change.
+Level changes are stored in local storage.
+Variables are grouped in the beginning, followed by all the functions needed, gameInit() starts the game and it is followed by the modal for the player's name and win screen. 
 
-      return [x, y]
-    }
-    ```
-  - `getNeighbourCell`: based on the cell you're on and the direction you're heading, determine which cell is the one you will land on (allows moving through the walls to appear on the opposite side)
-    ```js
-    function getNeighbourCell(position, direction) {
-      switch (direction) {
-        case 'up': return position < width ? position + (width * (width - 1)) : position - width
-        case 'right': return (position - (width - 1 )) % width === 0 ? position - (width - 1) : position + 1
-        case 'down': return position > (width * (width - 1)) - 1 ? position - (width * (width - 1)) : position + width
-        case 'left' : return position % width === 0 ? position + (width - 1) : position - 1
-      }
-    }
-    ```
-- Everything else, i.e. walls, power-ups, player and ghosts, are simply classes assigned to these cells. The layout of these types of cells was planned in Excel and turned into a corresponding array that assigns the relevant classes at the start of the game.
+### Bits & bobs
+Lasers dissapear on collision with aliens, when they reach the end of the screen and when they hit a rock (most of the time, see cheat code below).
+Aliens' bombs dissapear on collision with palyer and end of screen.
+Aliens can appear on opposite end of screen on higher levels which can be improved. 
+***Cheat code*** if you shoot lasers very quickly they will pass through the rocks.
 
-  <img src="./images/screenshots/gridassignment.png" width="400" />
-
-  ```js
-  const board = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 2, 1, 3, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 3, 1, 2, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 4, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 4, 4, 4, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 4, 4, 4, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 1, 1, 4, 1, 1, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 1, 1, 1, 2, 1, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1, 1, 1, 2, 1, 1, 2, 2, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 2, 2, 1, 1, 2, 1, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 1, 2, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 2, 1, 3, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 3, 1, 2, 1, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]  
-  
-  // SET UP GAME BOARD
-  for (let i = 0; i < width ** 2; i++){
-    const cell = document.createElement('div')
-    cell.classList.add('cell')
-
-    const cellClass = board[i] 
-
-    switch (cellClass) {
-      case 1: cell.classList.add('wall'); break
-      case 2: cell.classList.add('food'); break
-      case 3: cell.classList.add('energizer'); break
-      case 4: cell.classList.add('ghostpen'); break
-    }
-
-    grid.appendChild(cell)
-    cells.push(cell)
-  }  
-  ```
-
-### Ghost movement 
-- A single function is used to determine each ghost's movement. As in the original game, ghosts only look one move ahead. The function starts from considering the 4 possible options that a ghost could move to and narrows them down as follows:
-  - Since ghosts cannot move into walls or backwards, choices only need to be made at intersections.
-  - At an intersection, the as-the-crow-flies distance (straight line, ignores walls) to Pac-Man is calculated using Pythagoras' formula from each option and the cell that is closest (or in frightened state, furthest) is selected.
-
-- All ghosts move the same way in the same interval, the different behaviour solely emerges from different starting points.
-
-- In order to avoid the ghosts 'fusing together' as a result, if two ghosts bump into each other, they will reverse and keep going. 
-
-```js
-  function moveGhost(ghostHistory) {
-
-    let ghostOptions = [getNeighbourCell(ghostHistory[0], 'up'), getNeighbourCell(ghostHistory[0], 'right'), getNeighbourCell(ghostHistory[0], 'down'), getNeighbourCell(ghostHistory[0], 'left')]
-
-    // DISCARD WALLS AND PREVIOUS LOCATION
-    ghostOptions = ghostOptions.filter((option) => {
-      return !(cells[option].classList.contains('wall') || option === ghostHistory[1])
-    })
-
-    // SET NEW POSITION
-    let newGhost = 0
-    if (ghostOptions.length > 1) {
-
-      let minDistance = 30 // theoretical maximum
-      let maxDistance = 0 // theoretical minimum
-
-      const distances = ghostOptions.map((cell) => {
-
-        const playerXY = getXY(player)
-        const newGhostXY = getXY(cell)
-
-        const distance = Math.sqrt((playerXY[0] - newGhostXY[0]) ** 2 + (playerXY[1] - newGhostXY[1]) ** 2)
-
-        distance < minDistance ? minDistance = distance : minDistance
-        distance > maxDistance ? maxDistance = distance : maxDistance
-
-        return distance
-      })
-
-      if (!frightened) {
-        newGhost = distances.indexOf(minDistance)
-      } else {
-        newGhost = distances.indexOf(maxDistance)
-      }
-
-      (...)
-    }
-  }
-```
-
-
-### Game timing 
-- Ghosts are on set intervals, moving one at a time using the algorithm in `moveGhost` which was described above.
-  ```js 
-    ghostInterval = setInterval(() => {
-      for (let i = 0; i < 4; i++) {
-        ghostHistories[i] = moveGhost(ghostHistories[i])
-      }
-    }, 300)
-  ```
-- For the player, there is an Eventlistener on the window, listening for WASD input from the player.
-  ```js
-    document.addEventListener('keydown', e => {
-    switch (e.key) {
-      case 'w': {
-        const cellIndex = getNeighbourCell(player, 'up')
-        cells[player].classList.remove('player', 'up', 'right', 'down', 'left')     
-        player = movePlayer(cellIndex)
-        cells[player].classList.add('player', 'up')
-        break
-      }
-      (...)
-    }
-  }
-  ```
-
-### Collisions 
-- As an overlap of classes could be too brief to detect all collisions reliably (i.e. if timed correctly, pac-man could 'pass through' a ghost), I implemented a player shadow around all cells of the player that would all be considered as collisions if a ghost hit them.
-  ```js
-  playerShadow = [getNeighbourCell(player, 'up'), getNeighbourCell(player, 'right'), getNeighbourCell(player, 'down'), getNeighbourCell(player, 'left')]
-  ```
-- There are checks for collisions both in the movements of the ghosts and the player
-  - in `moveGhost`:
-
-    ```js
-    if (cells[ghostHistory[0]].classList.contains('player') || playerShadow.includes(ghostHistory[0])) {
-      ghostHistory = collideWithGhost(ghostHistory)
-    } 
-    ```
-  - in `movePlayer`:
-  
-    ```js
-    else if (newPosition.classList.contains('ghost')) {
-        for (let i = 0; i < 4; i++) {
-          if (ghostHistories[i].includes(player)) {
-            ghostHistories[i] = collideWithGhost(ghostHistories[i])
-          }
-        }
-    } 
-    ```
-
-### Power-ups and 'frightened' state 
-- When pac-man eats an energizer, a global boolean 'frightened' is toggled from false to true for 10 seconds.
-
-- If another energizer is consumed when the boolean already had the value true, the timer is reset to 10 seconds from the time of consumption of the last energizer.
-
-- Various behaviours are different when this boolean is true, namely:
-  1) Ghosts choose the cell furthest away from pac-man, not closest
-  2) If pac-man collides with a ghost, 100 points are added to the score and the ghost is relocated to the ghost-pen
-  3) The CSS class frightened changes the look of the ghosts
-
-- A countdown was added to alert the player of the time the game is remaining in the frightened state.
-
-### Variables 
-At all times various variables are used to keep track of things happening in the game:
-
-- `player`: the index of the cell the player is on
-- `playerShadow`: keeps track of all cells around the player in an array, to improve collision detection
-- `ghostHistories`: the location of all 4 ghosts in an array, in which each ghost has their own array of their current and immediately preceding position (also as cell indices)
-- `frightened`: a boolean that is at all times either false (base state) or true (for 10 seconds after an _energizer_ is consumed)
-- `score`: every time the player moves onto a cell with the _food_ class on it, 1 is added to the score; if the player collides with a _ghost_ while the state _frightened_ is true, 100 is added to the score.
-- `lives`: starts at 3 and every time the player collides with a non-frightened _ghost_, 1 life is taken away; if `lives === 0`, the player has lost and the game ends.
-- `foodCount`: counts down from the total amount of food on the board (200) every time the player lands on a cell with the _food_ class on it; if it `foodCount === 0`, the player has won and the game ends.
-
-### Non-game screens
-
-- To simplify the display, I decided to always wipe the grid at the centre of the screen and display a new message div over it. For instance, when the game ends, the following function is called:
-
-```js
-// END GAME SCREEN
-  function endGame(state) {
-
-    // CLEAR VARIABLES
-    clearInterval(ghostInterval)
-    grid.innerHTML = '' 
-    cells = []
-
-    grid.appendChild(messageScreen)
-
-    // VICTORY SCREEN
-    if (state === 'win') {
-      messageScreen.innerHTML = `You won! Your score was ${score}.`
-
-      (...)
-    }
-  }
-```
-
-
-## Screenshots
-
-![Start screen](/images/screenshots/start-screen.png)
-
-![Countdown screen](/images/screenshots/countdown.png)
-
-![Gameplay](/images/screenshots/gameplay.png)
-
-![Victory screen](/images/screenshots/victory-screen.png)
-
-![High scores screen](/images/screenshots/high-scores.png)
-
-![Defeat screen](/images/screenshots/game-over.png)
-
-![Mobile screen](/images/screenshots/mobile.png)
-
-## Bugs ![Frightened cat](/images/cat-frightened.png)
-
-- In spite of the 'player shadow' described above, the collisions are still not 100% reliable - sometimes pac-man can 'pass through' a ghost.
-
-## Potential future features
-
-- Server-side saved scoreboard
-- Mobile-compatibility
-- Boss levels
-
-
-## Lessons learned
-
-- Animations by looping images are a no go, CSS animations preferred.
-
-- Though in theory c....
 
 ## Assets & credit
 
