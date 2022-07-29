@@ -1,6 +1,5 @@
 //! Intro: This game uses minimal HTML and several loops to move things around the map.
 //! Loops are broken down into several functions to allow for easy debugging.
-//JavaScript 77.2% ; CSS 16.5% ; HTML 6.3%
 
 const grid = document.querySelector('.grid');
 const scoreBoard = document.querySelector('.scoreBoard');
@@ -372,7 +371,7 @@ function checkRocks() {
 
 function gameScoreOnGO() {                                       //displayig score on Game Over
   const allAliens = aliensPosArray1.concat(aliensPosArray2, aliensPosArray3);
-  if (allAliens == 0) {
+  if (allAliens === 0) {
     gameOver = 1;
   }
   if (gameOver === 1 && playerCurrentHealth > 0) {
@@ -456,7 +455,7 @@ function addEventListeners() {
 }
 
 function gameInit() {                                                    //initiates games basically, calls all initial functions
-  if (localStorage.getItem("level") != null) {
+  if (localStorage.getItem("level") !== null) {
     updateLvlOnStart(localStorage.getItem("level"));
   }                //update level from local storage
   playerNameHtml.innerHTML = localStorage.getItem("playerName");    //update name from local storage
@@ -485,7 +484,7 @@ modalForm.onsubmit = function () {                                          // W
 }
 
 window.onclick = function (event) {                                              // When the user clicks anywhere outside of the modal, close it
-  if (event.target == modal) {
+  if (event.target === modal) {
     playerNameHtml.innerHTML = document.forms["playerOneForm"]["pname"].value;
     localStorage.setItem("playerName", playerNameHtml.innerHTML);
     modal.style.display = "none";                                                 // close modal
