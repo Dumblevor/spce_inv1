@@ -1,96 +1,26 @@
 ### ![Invaders 23 by Dimitar Vidolov](https://dumblevor.github.io/spce_inv1/assets/animatedLogo.gif)
-<<<<<<< HEAD
-Dimitar Vidolov, Software Engineered this.
 
 # Invaders 23
  
+Developed by Dimitar Vidolov.
 
 ## Overview
 
-First project as part of the software engineering immersive course at GA London. The assignment was to create a grid-based game to be rendered in the browser, using HTML, CSS and JavaScript. The project was to be completed **individually** within **one week**.
+First project as part of the software engineering immersive course at GA London. The assignment was to create a grid-based game to be rendered in the browser, using HTML, CSS and JavaScript. The project was to be completed **individually** within **6 days** over 3 weeks. 
 
 Given a list of options from GA, I chose to re-create the classic game **Space Invaders**. 
 
 You can launch the game on GitHub pages [here](https://dumblevor.github.io/spce_inv1/) and the repo [here](https://github.com/Dumblevor/spce_inv1).
 
-## Brief
+Preview: ![Invaders-23-Gameplay](./readme_demo.gif)
+Controls are clearly visible on the right hand side and you can toggle playing a catchy tune to go with your gameplay (stretch goal), not to mention the sound effects (stretch goal) and your pointer will dissappear while playing (stretch goal).
 
-- **Render a game in the browser**
-- **Design logic for winning & visually display when player wins**
-- **Include separate HTML / CSS / JavaScript files**
-- Stick with **KISS (Keep It Stupid Simple)** and **DRY (Don't Repeat Yourself)** principles
-- Use **Javascript** for **DOM manipulation**
-- **Deploy your game online**, where the rest of the world can access it
-- Use **semantic markup** for HTML and CSS (while adhering to best practices)
-
-## Technologies used !
+## Technologies used 
 
 - HTML
 - CSS
 - JavaScript
 - Git and GitHub
-
-## Approach
-
-Actitivities are broken down into seperate components, hardcoding is kept quite low for the most part.
-The grid is generated (by makeGrid()) with fixed size, elements on the grid are moved by adding and removing classes on the grid with time intervals and I put listeners to detect collisions.
-The location for some of the elements are kept in seperate arrays.
-
-### Elements set-up 
-None of the elements (aliens, rocks, player's ship, etc.) are hard hardcoded, but generated when needed.
-The end of movement of the aliens to the right starts the movement to the left. 
-Player's lasers and aliens' bombs move with intervals, new bombs deployment speeds up on level change.
-Level changes are stored in local storage.
-Variables are grouped in the beginning, followed by all the functions needed, gameInit() starts the game and it is followed by the modal for the player's name and win screen.
-Hitting the enter acts as clicking the button for next level/play again/enter name.
-
-### Bits & bobs
-Lasers dissapear on collision with aliens, when they reach the end of the screen and when they hit a rock (most of the time, see cheat code below).
-Aliens' bombs dissapear on collision with palyer and end of screen.
-Aliens can appear on opposite end of screen on higher levels which can be improved. 
-***Cheat code*** if you shoot lasers very quickly they will pass through the rocks.
-
-
-## Assets & credit
-=======
-# Dimitar Vidolov's project #1
-part of General Assembly's Software Engineering Immersive, Flex, class #23. 
-
-Timeframe: 9 days
-
-## Goal
-Create a fully functional web-based game of my choice using vanilla JavaScript.
-
-## Technologies used:
-* JavaScript
-* CSS3 with animation
-* Git
-* Github
-* HTML5 with HTML5 audio
-
-# Invaders 23 
-
-First project as part of the software engineering immersive course at GA London. The assignment was to create a grid-based game to be rendered in the browser, using HTML, CSS and JavaScript. The project was to be completed **individually**.
-
-Given a list of options from GA, I chose to re-create the classic game **Space Invaders**. 
-
-You can launch the game [here](https://dumblevor.github.io/spce_inv1/) and the repo is [here](https://github.com/Dumblevor/spce_inv1).
-
-Here is a quick demo: 
-![Gameplay_demo](./readme_demo.gif)
-<!-- ![Gameplay_1](./Gameplay_screen_1.png) -->
-Controls are clearly visible on the right hand side and you can toggle playing a catchy tune to go with your gameplay (stretch goal), not to mention the sound effects (stretch goal) and your pointer will dissappear while playing (stretch goal).
-
-## Brief
-
-- Render a game in the browser.
-- Design logic for winning & visually display when player wins.
-- Include separate HTML / CSS / JavaScript files.
-- Stick with KISS (Keep It Stupid Simple) and DRY (Don't Repeat Yourself) principles.
-- Use Javascript for **DOM manipulation.
-- Deploy your game online, where the rest of the world can access it.
-- Use semantic markup for HTML and CSS (while adhering to best practices).
-
 
 ## Approach
 
@@ -102,59 +32,154 @@ Actitivities are broken down into seperate components, hardcoding is kept quite 
 The grid is generated (by makeGrid()) with fixed size, elements on the grid are moved by adding and removing classes on the grid with time intervals and I put listeners to detect collisions.
 The locations of the elements are all kept in seperate arrays.
 
-![Whiteboard_space_invaders_23](./whiteboard.png)
+Whiteboarding it using Miro:
+![Invaders-23-Whteboarding](./whiteboard.png)
 
-Timeline overview:
-
+## Timeline
 - Day 1 - Planning & psudo
-- Day 2 - setting up basics
-- Day 3-4 - MVP up
-- Day 6-8 - Improving movement, adding infinite levels (stretch 2 goal) and a modal (stretch 2 goal).
-- Day 8-9 - High value low effort fetaures added like music, background, animations for explosions and 'flying' (stretch 3 goals). 
+- Day 2 - MVP up
+- Day 4 - Improving movement, adding infinite levels (stretch 2 goal) and a modal (stretch 2 goal).
+- Day 5 - High value low effort fetaures added like music, background, animations for explosions and 'flying' ship. 
 
-# Intro
-### Elements set-up 
-None of the elements (aliens, rocks, player's ship, etc.) are hard hardcoded, but generated as needed.
+### Day 2
+Grid setup, figured out spacing, positions and limitations needed fort the game to function properly. 
+![Invaders-23-day1](./Screen1.png)
+
+### Day 2
+MVP done!
+![Invaders-23-day2](./Screen2.png)
+
+### Day 4
+![Invaders-23-day3](./Screen3.png)
+
+### Day 5
+<!-- ![Invaders-23-day5](./Screen5.png) -->
+Mostly focused on adding music, sound and visual effects to the game, as well adding button shortcuts and disappearing cursor on game start, only across the grid of the game though:
+```
+grid.style.cursor = 'none'; //!hide cursor when game starts
+````
+
+## Elements set-up 
+None of the elements (aliens, rocks, player's ship, etc.) are hard hardcoded, but **generated** when needed.
+
+- The grid is generated with a loop via makeGrid(), rocks via createRocks()
+```
+function makeGrid() {                            // make grid map
+  for (let i = 0; i < cellCount; i++) {
+    const cell = document.createElement("div");
+    cell.classList.add('cell');
+    grid.appendChild(cell);                        //add divs in html under div.grid
+    cells.push(cell);                               //push div cells into cells array
+  }
+}
+```
+- Buttons are generated with makeButtons(), invaders via createAliens()
+- Enemy ships move sideways and towards the player via timeloops (i.e. time intervals)inside the moveFourRight, moveFourLeft and moveAliensDown functions.
+- dropBombsinitiates() enemy bombs via newBombInit() which move with a timeloop in moveBombs()
+- Player's laser work in the same way, but on hitting the space bar. This is done via an event listener in addEventListeners()
+- Player movemen operates in the same way. 
+
 The end of movement of the aliens to the right starts the movement to the left. 
-Player's lasers and aliens' bombs move with intervals, new bombs deployment speeds up on level change (stretch).
+Player's lasers and aliens' bombs move with intervals, new bombs deployment speeds up on level change.
 Level changes are stored in local storage.
-Variables set-up is grouped in the beginning, followed by all the functions needed, gameInit() starts the game and it is followed by the modal for the player's name and win screen. 
+Variables are grouped in the beginning of the code, followed by all the functions needed, gameInit() starts the game and it is followed by the modal for the player's name input and win screen.
+Hitting the enter acts as clicking the button for next level/play again/enter name which was a last minute addon feature. 
 
-### Bits & bobs
-Lasers dissapear on collision with aliens, when they reach the end of the screen and when they hit a rock (see cheatcode below).
-Aliens' bombs dissapear on collision with palyer and end of screen.
-Aliens can appear on opposite end of screen on higher levels which can be improved. 
+## Bits & bobs
+- Lasers dissapear on collision with aliens, when they reach the end of the screen and when they hit a rock (most of the time, see cheat code below).
+- Aliens' bombs dissapear on collision with palyer and end of screen.
+- Aliens can appear on opposite end of screen on higher levels which can be improved. 
 
+- ***Cheat code*** if you shoot lasers very quickly they will pass through the rocks.
 
-# Timeline
-## Day 2
-![game_grid](./Screenshot_2022-04-08_at_18.55.43.png)
-Grid is up. At this point I had to decide and test alien invaders configuration and number.
-Making sure player can move left and right, within expected limits. 
+## Animations & sound effects
 
-## Day 3 
-![gameplay_day_3](./Screenshot_2022-04-16_at_6.58.54.png)
-Here it was time to think about the movement width and speed, as well as speed for the alien attacks and the player's.
-All locations of the different items/elements are kept in arrays and updated or removed as needed.
+- damagePlayer() visualises an explosion when the player dies.
+- 
 
+## Game Over
+Checks if it's time for the game to be over and initiates next steps:
+```
 
+function gameScoreOnGO() {                                  //displayig score on Game Over
+  const allAliens = aliensPosArray1.concat(aliensPosArray2, aliensPosArray3);
+  if (allAliens === 0) {
+    gameOver = 1;
+  }
+  if (gameOver === 1 && playerCurrentHealth > 0) {
+    modal.style.display = "block";                          // show modal
+    const nxtLvlBut = document.createElement("button");     //create button
+    nxtLvlBut.classList.add('submit');                      //add class to button for CSS 
+    nxtLvlBut.innerHTML = "PLAY NEXT LEVEL";                //gives instructions to player what's going to happen if they press the button
+    nxtLvlBut.onclick = function () {                       //button funtion
+      nxtLvlBut.remove();                                   //remove button
+      modal.style.display = "none";                         // close modal
+      levelChange(currentLevel);                           //update level +1 and run game
+    }
+    document.querySelector(".modal-content").innerHTML = "Level cleared, " + playerNameHtml.innerHTML + "! Your score is " + playerOneScore + "!"; //displayed text on win 
+    document.querySelector(".modal-content").appendChild(nxtLvlBut); //button element being added to the modal
+    document.addEventListener('keydown', (event) => {
+      if (event.code === 'Enter') {
+        nxtLvlBut.click();
+      }
+    })
+  } else if (gameOver === 1 && playerCurrentHealth <= 0) {
+    modal.style.display = "block"; // show modal
+    const nxtLvlBut = document.createElement("button");     //create button
+    nxtLvlBut.classList.add('submit');                    //add class to button for CSS 
+    nxtLvlBut.innerHTML = "PLAY AGAIN";                   //gives instructions to player what's going to happen if they press the button
+    nxtLvlBut.onclick = function () {                     //button funtion
+      nxtLvlBut.remove();                              //remove button
+      modal.style.display = "none";                     // close modal
+      resetFun();                                     //restarts game from level 1
+    }
+    document.querySelector(".modal-content").innerHTML = playerNameHtml.innerHTML + ", your ship was destroyed. Better luck next time. Your score is " + playerOneScore + ""; // displayed text on win 
+    document.querySelector(".modal-content").appendChild(nxtLvlBut); //button element being added to the modal
+    document.addEventListener('keydown', (event) => {
+      if (event.code === 'Enter') {
+        nxtLvlBut.click();
+      }
+    }
+    )
+  }
+  ```
 
-
-
-***Cheat code:*** if you shoot lasers very quickly they will pass through the rocks.
-
-
-# Assets & credits
->>>>>>> 282e143 (readme updates)
+On game start the code initiates all functions needed with gameInit():
+```function gameInit() {                                        //initiates games basically, calls all initial functions
+  if (localStorage.getItem("level") !== null) {
+    updateLvlOnStart(localStorage.getItem("level"));
+  }                //update level from local storage
+  playerNameHtml.innerHTML = localStorage.getItem("playerName");    //update name from local storage
+  makeGrid();
+  bombsTimingUpdate(Number(currentLevel));                        // update bombs timing to level
+  moveLasers();
+  moveBombs();
+  createRocks();
+  addPlayerShip();                                                 //initiates player ship
+  createAliens(Number(currentLevel));                              //create aliens dependent on level
+  moveFourRight();                                                 //alternates with left, moves 3 not 4.
+  dropBombs(bombsTiming);                                         //initiates bomb dropping by aliens
+  addEventListeners();
+  grid.style.cursor = 'none';                                    //!hide cursor when game starts
+}
+```
+## Assets & credit
 
 - Logo: Dimitar Vidolov  (canva.com).
 - Ship flame 'animation': Dimitar Vidolov (canva.com).
 - Player 1 spaceship: Dimitar Vidolov (canva.com).
-<<<<<<< HEAD
-- Sounds from 
+<!-- - Sounds from  -->
 - Icons (rocks, ships) from flaticon.com
 
 
-=======
-- Icons (rocks, ships) from flaticon.com
->>>>>>> 282e143 (readme updates)
+--------
+
+## The Brief
+
+- Render a game in the browser.
+- Design logic for winning & visually display when player wins.
+- Include separate HTML / CSS / JavaScript files.
+- Stick with KISS (Keep It Stupid Simple) and DRY (Don't Repeat Yourself) principles.
+- Use Javascript for **DOM manipulation.
+- Deploy your game online, where the rest of the world can access it.
+- Use semantic markup for HTML and CSS (while adhering to best practices).
