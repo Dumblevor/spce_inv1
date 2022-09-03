@@ -57,7 +57,7 @@ Mostly focused on adding music, sound and visual effects to the game, as well as
 
 ```
 grid.style.cursor = 'none'; //!hide cursor when game starts
-````
+```
 
 ## Elements set-up 
 None of the elements, e.g. aliens, rocks, player's ship, are hard-coded, but **generated** when needed.
