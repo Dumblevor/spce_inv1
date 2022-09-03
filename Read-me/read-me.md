@@ -10,7 +10,7 @@ This is the first project of the software engineering immersive course at GA Lon
 
 Given a list of options from GA, I chose to re-create the classic game **Space Invaders**. 
 
-You can launch the game on GitHub pages [here](https://dumblevor.github.io/spce_inv1/) and the repo [here](https://github.com/Dumblevor/spce_inv1).
+You can play [here](https://dumblevor.github.io/spce_inv1/).
 
 Preview: ![Invaders-23-Gameplay](./readme_demo.gif)
 Controls are clearly visible on the right-hand side and you can toggle playing a catchy tune to go with your gameplay (stretch goal), not to mention the sound effects (stretch goal) and your pointer will disappear while playing (stretch goal).
