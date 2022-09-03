@@ -12,7 +12,7 @@ Given a list of options from GA, I chose to re-create the classic game **Space I
 
 You can play [here](https://dumblevor.github.io/spce_inv1/).
 
-Preview: ![Invaders-23-Gameplay](./readme_demo.gif)
+Preview: ![Invaders-23-Gameplay](.readme-assets/readme_demo.gif)
 Controls are clearly visible on the right-hand side and you can toggle playing a catchy tune to go with your gameplay (stretch goal), not to mention the sound effects (stretch goal) and your pointer will disappear while playing (stretch goal).
 
 ## Technologies used 
@@ -33,7 +33,7 @@ The grid is generated (by makeGrid()) with a fixed size, elements on the grid ar
 The locations of the elements are all kept in separate arrays.
 
 Whiteboarding it using Miro:
-![Invaders-23-Whteboarding](./whiteboard.png)
+![Invaders-23-Whteboarding](.readme-assets/whiteboard.png)
 
 ## Timeline
 - Day 1 - Planning & pseudo
@@ -43,14 +43,14 @@ Whiteboarding it using Miro:
 
 ### Day 2
 Set up the grid, and figured out the spacing, positions and limitations needed for the game to function properly. 
-![Invaders-23-day1](./Screen1.png)
+![Invaders-23-day1](.readme-assets/Screen1.png)
 
 ### Day 2
 MVP done!
-![Invaders-23-day2](./Screen2.png)
+![Invaders-23-day2](.readme-assets/Screen2.png)
 
 ### Day 4
-![Invaders-23-day3](./Screen3.png)
+![Invaders-23-day3](.readme-assets/Screen3.png)
 
 ### Day 5
 <!-- ![Invaders-23-day5](./Screen5.png) -->
