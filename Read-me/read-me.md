@@ -168,18 +168,6 @@ On game start the code initiates all functions needed with gameInit():
 - Logo: Dimitar Vidolov (canva.com).
 - Ship flame 'animation': Dimitar Vidolov (canva.com).
 - Player 1 spaceship: Dimitar Vidolov (canva.com).
-<!-- - Sounds from -->
 - Icons (rocks, ships) from flaticon.com
-
-
 --------
 
-## The Brief
-
-- Render a game in the browser.
-- Design logic for winning & visually display when a player wins.
-- Include separate HTML / CSS / JavaScript files.
-- Stick with KISS (Keep It Stupid Simple) and DRY (Don't Repeat Yourself) principles.
-- Use Javascript for **DOM manipulation.
-- Deploy your game online, where the rest of the world can access it.
-- Use semantic markup for HTML and CSS (while adhering to best practices).
