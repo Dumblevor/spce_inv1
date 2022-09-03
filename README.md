@@ -54,6 +54,7 @@ MVP done!
 
 ### Day 5
 Mostly focused on adding music, sound and visual effects to the game, as well as adding button shortcuts and disappearing cursor on game start, only across the grid of the game though:
+
 ```
 grid.style.cursor = 'none'; //!hide cursor when game starts
 ````
@@ -62,6 +63,7 @@ grid.style.cursor = 'none'; //!hide cursor when game starts
 None of the elements, e.g. aliens, rocks, player's ship, are hard-coded, but **generated** when needed.
 
 - The grid is generated with a loop via makeGrid(), rocks via createRocks()
+
 ```
 function makeGrid() { // make grid map
  for (let i = 0; i < cellCount; i++) {
@@ -72,6 +74,7 @@ function makeGrid() { // make grid map
  }
 }
 ```
+
 - Buttons are generated with makeButtons(), invaders via createAliens()
 - Enemy ships move sideways and towards the player via time loops (i.e. time intervals)inside the moveFourRight(), moveFourLeft() and moveAliensDown functions.
 - dropBombsinitiates() enemy bombs via newBombInit() which move with a timeloop in moveBombs()
@@ -103,6 +106,7 @@ Hitting the enter acts as clicking the button for next level/play again/enter th
  animation: speedMove 1s infinite;
 }
 ```
+- I've also added sound effects on shooting a laser and destroying an invader.
 
 ## Game Over
 Checks if it's time for the game to be over and initiates next steps:
