@@ -53,7 +53,6 @@ MVP done!
 ![Invaders-23-day3](./readme-assets/Screen3.png)
 
 ### Day 5
-<!-- ![Invaders-23-day5](./Screen5.png) -->
 Mostly focused on adding music, sound and visual effects to the game, as well as adding button shortcuts and disappearing cursor on game start, only across the grid of the game though:
 ```
 grid.style.cursor = 'none'; //!hide cursor when game starts
@@ -80,7 +79,7 @@ function makeGrid() { // make grid map
 - Player movement operates in the same way. 
 
 The end of the movement of the aliens to the right starts the movement to the left. 
-Player's lasers and aliens' bombs move with setInterval(s), and new bombs deployment speeds up on level change.
+The Player's lasers and aliens' bombs move with setInterval(s), and new bombs deployment speeds up on level change.
 Level changes are stored in local storage.
 Variables are grouped at the beginning of the code, followed by all the functions needed, gameInit() starts the game and it is followed by the modal for the player's name input and win screen.
 Hitting the enter acts as clicking the button for next level/play again/enter the name which was a last-minute add-on feature. 
@@ -95,10 +94,20 @@ Hitting the enter acts as clicking the button for next level/play again/enter th
 ## Animations & sound effects
 
 - damagePlayer() visualises an explosion when the player dies.
-- 
+- The following creates the animation behind the ship to create the illusion that it is moving.
+```
+.speed {
+ background-size: contain;
+ background-repeat: no-repeat;
+ background-position: center;
+ animation: speedMove 1s infinite;
+}
+```
 
 ## Game Over
 Checks if it's time for the game to be over and initiates next steps:
+
+(please see inline comments for details)
 ```
 
 function gameScoreOnGO() { //displayig score on Game Over
@@ -138,10 +147,7 @@ function gameScoreOnGO() { //displayig score on Game Over
  document.addEventListener('keydown', (event) => {
  if (event.code === 'Enter') {
  nxtLvlBut.click();
- }
- }
- )
- }
+}})}
  ```
 
 On game start the code initiates all functions needed with gameInit():
