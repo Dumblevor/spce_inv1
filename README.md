@@ -8,7 +8,7 @@ Developed by Dimitar Vidolov.
 
 This is the first project of the software engineering immersive course at GA London. The assignment was to create a grid-based game to be rendered in the browser, using HTML, CSS and JavaScript. The project was to be completed **individually** within **6 days** over 3 weeks. 
 
-Given a list of options from GA, I chose to re-create the classic game **Space Invaders**. 
+Given a list of options from GA, I chose to recreate the classic game **Space Invaders**. 
 
 You can play [here](https://dumblevor.github.io/spce_inv1/).
 
@@ -78,7 +78,7 @@ function makeGrid() { // make grid map
 - Buttons are generated with makeButtons(), invaders via createAliens()
 - Enemy ships move sideways and towards the player via time loops (i.e. time intervals)inside the moveFourRight(), moveFourLeft() and moveAliensDown functions.
 - dropBombsinitiates() enemy bombs via newBombInit() which move with a timeloop in moveBombs()
-- Player's laser work in the same way, but on hitting the space bar. This is done via an event listener in addEventListeners()
+- Player's laser works in the same way, but on hitting the spacebar. This is done via an event listener in addEventListeners()
 - Player movement operates in the same way. 
 
 The end of the movement of the aliens to the right starts the movement to the left. 
@@ -124,7 +124,7 @@ function gameScoreOnGO() { //displayig score on Game Over
  const nxtLvlBut = document.createElement("button"); //create button
  nxtLvlBut.classList.add('submit'); //add class to button for CSS 
  nxtLvlBut.innerHTML = "PLAY NEXT LEVEL"; //gives instructions to player what's going to happen if they press the button
- nxtLvlBut.onclick = function () { //button funtion
+ nxtLvlBut.onclick = function () { //button function
  nxtLvlBut.remove(); //remove button
  modal.style.display = "none"; // close modal
  levelChange(currentLevel); //update level +1 and run game
@@ -141,7 +141,7 @@ function gameScoreOnGO() { //displayig score on Game Over
  const nxtLvlBut = document.createElement("button"); //create button
  nxtLvlBut.classList.add('submit'); //add class to button for CSS 
  nxtLvlBut.innerHTML = "PLAY AGAIN"; //gives instructions to player what's going to happen if they press the button
- nxtLvlBut.onclick = function () { //button funtion
+ nxtLvlBut.onclick = function () { //button function
  nxtLvlBut.remove(); //remove button
  modal.style.display = "none"; // close modal
  resetFun(); //restarts game from level 1

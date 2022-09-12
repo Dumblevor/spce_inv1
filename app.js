@@ -377,7 +377,7 @@ function gameScoreOnGO() {                                       //displayig sco
     const nxtLvlBut = document.createElement("button");         //create button
     nxtLvlBut.classList.add('submit');                        //add class to button for CSS 
     nxtLvlBut.innerHTML = "PLAY NEXT LEVEL";                  //gives instructions to player what's going to happen if they press the button
-    nxtLvlBut.onclick = function () {                          //button funtion
+    nxtLvlBut.onclick = function () {                          //button function
       nxtLvlBut.remove();                                   //remove button
       modal.style.display = "none";                           // close modal
       levelChange(currentLevel);                          //update level +1 and run game
@@ -394,7 +394,7 @@ function gameScoreOnGO() {                                       //displayig sco
     const nxtLvlBut = document.createElement("button"); //create button
     nxtLvlBut.classList.add('submit');              //add class to button for CSS 
     nxtLvlBut.innerHTML = "PLAY AGAIN";             //gives instructions to player what's going to happen if they press the button
-    nxtLvlBut.onclick = function () {                //button funtion
+    nxtLvlBut.onclick = function () {                //button function
       nxtLvlBut.remove();                           //remove button
       modal.style.display = "none";                  // close modal
       resetFun();                                   //restarts game from level 1
