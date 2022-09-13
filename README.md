@@ -173,6 +173,13 @@ On game start the code initiates all functions needed with gameInit():
  grid.style.cursor = 'none'; //!hide cursor when game starts
 }
 ```
+
+
+## Wins
+I was very excited to be able to implement small animations and progressively harder infinite levels on my first project. Not to mention the modal functionality, debugging the numerous bugs that came up along the way and getting the time intervals just right. Biggest win was watching people enjoying the game afterwards!
+
+
+
 ## Assets & credit
 
 - Logo: Dimitar Vidolov (canva.com).
