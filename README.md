@@ -10,7 +10,7 @@ This is the first project of the software engineering immersive course at GA Lon
 
 Given a list of options from GA, I chose to recreate the classic game **Space Invaders**. 
 
-You can play [here](https://dumblevor.github.io/spce_inv1/).
+You can [play it here](https://dumblevor.github.io/spce_inv1/).
 
 Preview: ![Invaders-23-Gameplay](./readme-assets/readme_demo.gif)
 Controls are clearly visible on the right-hand side and you can toggle playing a catchy tune to go with your gameplay (stretch goal), not to mention the sound effects (stretch goal) and your pointer will disappear while playing (stretch goal).
@@ -26,11 +26,15 @@ Controls are clearly visible on the right-hand side and you can toggle playing a
 
 Space Invaders was one of the more interesting, with several moving parts and it seemed like a worthy challenge. 
 Breaking it all down was key, from the 'sign-off' of the project.
-Here is my whiteboard:
 
 Activities are broken down into separate components, hardcoding is kept quite low for the most part.
 The grid is generated (by makeGrid()) with a fixed size, elements on the grid are moved by adding and removing classes on the grid with time intervals and I put listeners to detect collisions.
 The locations of the elements are all kept in separate arrays.
+
+It was an amazing learning experience form the beginning. Like in most games I started off thinking that aliens and the player should have health points and damage points, but quickly realized that was not the case back in the 90s, it was more of a one shot one kill type of deal. You can see below my thinking in the beginning for power and health, but this was not implemented in the end.
+The main concepets to be considered was how to move the aliens around, how and when to restrict movements for both aliens and players.
+
+The main barrier along the way was the debugging.
 
 Whiteboarding it using Miro:
 ![Invaders-23-Whteboarding](./readme-assets/whiteboard.png)
@@ -92,7 +96,6 @@ Hitting the enter acts as clicking the button for next level/play again/enter th
 - Aliens' bombs disappear on collision with the player and end of the screen.
 - Aliens can appear on the opposite end of the screen on higher levels which can be improved. 
 
-- ***Cheat code*** if you shoot lasers very quickly they will pass through the rocks.
 
 ## Animations & sound effects
 
@@ -178,6 +181,110 @@ On game start the code initiates all functions needed with gameInit():
 ## Wins
 I was very excited to be able to implement small animations and progressively harder infinite levels on my first project. Not to mention the modal functionality, debugging the numerous bugs that came up along the way and getting the time intervals just right. Biggest win was watching people enjoying the game afterwards!
 
+
+## Key Learnings
+
+- Animations
+Some last minute perks were added to make the game more dynamic.
+Speed on the back of the player ship, here is the CSS
+```
+@keyframes speedMove {
+  0% {
+    background-image: url('assets/1.png');
+  }
+  11% {
+    background-image: url('assets/2.png');
+  }
+  22% {
+    background-image: url('assets/3.png');
+  }
+  33% {
+    background-image: url('assets/4.png');
+  }
+  44% {
+    background-image: url('assets/5.png');
+  }
+  55% {
+    background-image: url('assets/6.png');
+  }
+  66% {
+    background-image: url('assets/7.png');
+  }
+  78% {
+    background-image: url('assets/8.png');
+  }
+  90% {
+    background-image: url('assets/9.png');
+  }
+  100% {
+    background-image: url('assets/10.png');
+  }
+}
+```
+
+As well as some explostion effects:
+```
+.supernova {
+  background-image: url('assets/supernova.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  animation: rotation2 5s infinite linear;
+}
+
+.explosion {
+  background-image: url('assets/stars.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  animation: rotation 7s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+@keyframes rotation2 {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(-359deg);
+  }
+}
+```
+
+- Modal:
+A neat feature I decided to add in the end to wrap up the game, useful across the board.
+- Event listeners:
+Listening for keystrokes is relevant for most games and it was a key learning here.
+- Local storage:
+I had heard of cookies storing data on local machines, but local storage is a ok tool to use for small projects like this one. 
+- Programmatic vs hard coded:
+Learning to programmatically generate elements was one of the key learnings, although out of scope of the our lessons.
+Of course one can hard code the map elements, but generating them allows for changes and scalability.
+In the example bellow with the map grid - if we change the cellcount, the grid will change as well and scale with the cellcount. 
+```
+function makeGrid() {                                                    // make grid map
+  for (let i = 0; i < cellCount; i++) {
+    const cell = document.createElement("div");
+    cell.classList.add('cell');
+    grid.appendChild(cell);                                        //add divs in html under div.grid
+    cells.push(cell);                                                  //push div cells into cells array
+  }
+}
+```
+
+## Bugs
+Bombs from aliens on the top rows overstep the aliens bellow on their way.
+- ***Cheat code*** if you shoot lasers quick enough they will pass through the rocks.
 
 
 ## Assets & credit
