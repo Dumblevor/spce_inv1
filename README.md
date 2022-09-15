@@ -32,7 +32,7 @@ The grid is generated (by makeGrid()) with a fixed size, elements on the grid ar
 The locations of the elements are all kept in separate arrays.
 
 It was an amazing learning experience form the beginning. Like in most games I started off thinking that aliens and the player should have health points and damage points, but quickly realized that was not the case back in the 90s, it was more of a one shot one kill type of deal. You can see below my thinking in the beginning for power and health, but this was not implemented in the end.
-The main concepets to be considered was how to move the aliens around, how and when to restrict movements for both aliens and players.
+The main concepets to be considered was how to move the aliens around, how and when to restrict movements for both aliens and players. I also jotted down some variables that I will probably use and which parts will loop with timeintervals, etc.
 
 The main barrier along the way was the debugging.
 
